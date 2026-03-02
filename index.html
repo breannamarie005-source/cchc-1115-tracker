@@ -6,32 +6,12 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-
-.service-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.service-row input[type="number"] {
-  width: 90px;
-}
-
-.tabSection {
-  display: none;
-}
-
-.tabSection.active {
-  display: block;
-}
-
 body{
   margin:0;
   font-family:Segoe UI,Arial;
   background:#071326;
   color:white;
 }
-
 header{
   background:#0f1f3a;
   padding:15px;
@@ -39,128 +19,37 @@ header{
   text-align:center;
   font-weight:bold;
 }
-
-.container{
-  padding:20px;
-}
-
+.container{ padding:20px; }
 .hidden{ display:none; }
-
 .card{
   background:#0f1f3a;
   padding:20px;
   border-radius:16px;
   margin-bottom:20px;
 }
-
-.form-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 15px;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-}
-
-.full-width {
-  grid-column: span 2;
-}
-
-.form-group label {
-  font-size: 13px;
-  margin-bottom: 4px;
-  opacity: 0.8;
-}
-
-input,select,button{
+button{
   padding:8px;
   border-radius:10px;
   border:none;
-}
-
-button{
   background:#1e6fd9;
   color:white;
   cursor:pointer;
 }
+.tabSection{ display:none; }
+.tabSection.active{ display:block; }
 
-.support-section {
-  background: rgba(255,255,255,0.04);
-  padding: 20px;
-  border-radius: 12px;
-  margin-top: 15px;
-}
-
-.support-header {
-  font-weight: 600;
-  margin-bottom: 15px;
-  font-size: 15px;
-}
-
-.service-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 6px 0;
-}
-
-.service-left {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.service-row input[type="number"] {
-  width: 90px;
-}
-
-.subtotal-box {
-  margin-top: 15px;
-  padding: 12px 15px;
-  background: rgba(0,150,255,0.12);
-  border-radius: 10px;
-  display: flex;
-  justify-content: space-between;
-  font-weight: 600;
-}
-
-.grand-total-box {
-  margin-top: 12px;
-  padding: 16px 18px;
-  background: linear-gradient(90deg, rgba(0,150,255,0.25), rgba(30,111,217,0.25));
-  border-radius: 12px;
-  display: flex;
-  justify-content: space-between;
-  font-size: 20px;
-  font-weight: bold;
-}
-#clientTable th,
-#clientTable td {
-  padding: 8px;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  color: white;
-}
-
-#clientTable th {
-  font-weight: 600;
-}
-
-#clientTable tr:hover {
-  background: rgba(255,255,255,0.05);
+#clientTable th,#clientTable td{
+  padding:8px;
+  border-bottom:1px solid rgba(255,255,255,0.1);
 }
 </style>
 </head>
 <body>
 
-<header>
-CCHC 1115 Waiver Performance Tracker
-</header>
+<header>CCHC 1115 Waiver Performance Tracker</header>
 
 <div class="container">
 
-<!-- LOGIN SCREEN -->
 <div id="loginSection" class="card">
   <h3>Login</h3>
   <input id="email" placeholder="Email"><br><br>
@@ -169,253 +58,50 @@ CCHC 1115 Waiver Performance Tracker
   <p id="loginError" style="color:red;"></p>
 </div>
 
-<!-- APP CONTENT -->
 <div id="appSection" class="hidden">
 
 <div style="margin-bottom:20px;">
   <button onclick="showTab('dashboardTab')">Dashboard</button>
-  <button onclick="showTab('entryTab')">Client Entry</button>
   <button onclick="showTab('listTab')">Client List</button>
 </div>
 
-  <div class="card">
-    <button onclick="logout()">Logout</button>
-    <h3 id="roleDisplay"></h3>
-  </div>
+<div class="card">
+  <button onclick="logout()">Logout</button>
+  <h3 id="roleDisplay"></h3>
+</div>
 
-
-  <div id="dashboardTab" class="tabSection">
+<div id="dashboardTab" class="tabSection">
   <div class="card">
     <h3>Dashboard</h3>
     <canvas id="navChart"></canvas>
   </div>
 </div>
 
-<div id="entryTab" class="tabSection">
-  <div class="card">
-
-<h3>Client Entry</h3>
-
-<div class="form-grid">
-
-  <div class="form-group full-width">
-    <label>Client Name</label>
-    <input id="clientName">
-  </div>
-
-  <div class="form-group">
-    <label>Status</label>
-    <select id="status">
-      <option>Open</option>
-      <option>Closed</option>
-    </select>
-  </div>
-
-  <div class="form-group">
-    <label>Navigator</label>
-    <select id="navigator">
-      <option>Breanna Shelanskey</option>
-      <option>Kylie Miles</option>
-      <option>Alexandra Dieffenbacher</option>
-      <option>Laurie Davis</option>
-      <option>Shauna Cone</option>
-    </select>
-  </div>
-
-  <div class="form-group">
-    <label>Medicaid Type</label>
-    <select id="medicaid">
-      <option>MCO</option>
-      <option>Fee for service</option>
-      <option>Not in enhanced population</option>
-      <option>No needs at this time</option>
-    </select>
-  </div>
-
-  <div class="form-group">
-    <label>Medicaid Level</label>
-    <select id="medicaidLevel">
-      <option></option>
-      <option>Level 1 MCO</option>
-      <option>Level 2 MCO</option>
-      <option>Level 1 FFS</option>
-    </select>
-  </div>
-
-  <div class="form-group">
-    <label>Eligibility Date</label>
-    <input type="date" id="eligibilityDate">
-  </div>
-
-  <div class="form-group">
-    <label>Follow Up Date</label>
-    <input type="date" id="followUpDate">
-  </div>
-
-
-<div class="form-group">
-  <label>Eligibility Units</label>
-  <input type="number" id="eligibilityUnits" oninput="calculateTotals()">
-  <div style="font-size:13px;color:#8fd3ff;margin-top:4px;" id="eligibilityTotal">$0.00</div>
-</div>
-
-<div class="form-group">
-  <label>Service Units</label>
-  <input type="number" id="serviceUnits" oninput="calculateTotals()">
-  <div style="font-size:13px;color:#8fd3ff;margin-top:4px;" id="serviceTotal">$0.00</div>
-</div>
-
-<div class="form-group full-width" style="margin-top:10px;">
-  <div style="
-    background:rgba(0,150,255,0.15);
-    padding:12px 15px;
-    border-radius:10px;
-    display:flex;
-    justify-content:space-between;
-    font-weight:bold;
-    font-size:16px;
-  ">
-    <span>Navigation Subtotal</span>
-    <span id="navigationTotal">$0.00</span>
-  </div>
-</div>
-
-<div class="form-group full-width support-section">
-
-  <div class="support-header">
-    Support Services (Flat Dollar Amounts)
-  </div>
-
-  <div class="service-row">
-    <div class="service-left">
-      <input type="checkbox" class="svcCheck" value="Epicured">
-      <label>Epicured</label>
-    </div>
-<input type="text" class="svcAmount" placeholder="$" onblur="formatCurrencyInput(this)">  
-</div>
-
-  <div class="service-row">
-    <div class="service-left">
-      <input type="checkbox" class="svcCheck" value="Kitchenware">
-      <label>Kitchenware</label>
-    </div>
-<input type="text" class="svcAmount" placeholder="$" onblur="formatCurrencyInput(this)">  </div>
-
-  <div class="service-row">
-    <div class="service-left">
-      <input type="checkbox" class="svcCheck" value="Fridge">
-      <label>Fridge</label>
-    </div>
-<input type="text" class="svcAmount" placeholder="$" onblur="formatCurrencyInput(this)">  </div>
-
-  <div class="service-row">
-    <div class="service-left">
-      <input type="checkbox" class="svcCheck" value="Pre-Tenancy">
-      <label>Pre-Tenancy</label>
-    </div>
-<input type="text" class="svcAmount" placeholder="$" onblur="formatCurrencyInput(this)">  </div>
-
-  <div class="service-row">
-    <div class="service-left">
-      <input type="checkbox" class="svcCheck" value="Transportation">
-      <label>Transportation</label>
-    </div>
-<input type="text" class="svcAmount" placeholder="$" onblur="formatCurrencyInput(this)">  </div>
-
-  <div class="service-row">
-    <div class="service-left">
-      <input type="checkbox" class="svcCheck" value="Microwave">
-      <label>Microwave</label>
-    </div>
-<input type="text" class="svcAmount" placeholder="$" onblur="formatCurrencyInput(this)">  </div>
-
-  <div class="service-row">
-    <div class="service-left">
-      <input type="checkbox" class="svcCheck" value="Utilities">
-      <label>Utilities</label>
-    </div>
-<input type="text" class="svcAmount" placeholder="$" onblur="formatCurrencyInput(this)">  </div>
-
-  <div class="service-row">
-    <div class="service-left">
-      <input type="checkbox" class="svcCheck" value="Follow Up">
-      <label>Follow Up</label>
-    </div>
-<input type="text" class="svcAmount" placeholder="$" onblur="formatCurrencyInput(this)">  </div>
-
-  <div class="subtotal-box">
-    <span>Support Services Subtotal</span>
-    <span id="supportTotal">$0.00</span>
-  </div>
-
-  <div class="grand-total-box">
-    <span>Grand Total</span>
-    <span id="grandTotal">$0.00</span>
-  </div>
-
-</div>
-
-  <div class="full-width">
-    <button onclick="saveClient()" style="width:100%;margin-top:10px;">
-      Save Client
-    </button>
-  <hr style="margin:20px 0; opacity:0.2;">
-
-<h4>Import Historical Clients</h4>
-<input type="file" id="csvFile" accept=".csv">
-<button onclick="importHistorical()">Import CSV</button>
-</div>
-</div>
-</div>
-  
-
 <div id="listTab" class="tabSection">
   <div class="card">
     <h3>Client List</h3>
-
-  <table id="clientTable" style="width:100%; border-collapse: collapse;">
-    <thead>
-      <tr>
-        <th style="text-align:left;">Client</th>
-  	<th style="text-align:left;">Navigator</th>
-  	<th style="text-align:left;">Status</th>
-  	<th style="text-align:left;">Units</th>
-  	<th style="text-align:left;">Services</th>
-  	<th style="text-align:left;">Actions</th>
-      </tr>
-    </thead>
-    <tbody id="clientTableBody">
-    </tbody>
-  </table>
-
- </div>
+    <table id="clientTable" style="width:100%;border-collapse:collapse;">
+      <thead>
+        <tr>
+          <th>Client</th>
+          <th>Navigator</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="clientTableBody"></tbody>
+    </table>
+  </div>
 </div>
 
 </div>
-
 </div>
 
 <script type="module">
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
-import { 
-  getAuth,
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut
-} from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
-
-import { 
-  getFirestore,
-  collection,
-  addDoc,
-  onSnapshot,
-  doc,
-  deleteDoc,
-  updateDoc,
-  getDoc
-} from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
-
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut }
+from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+import { getFirestore, collection, onSnapshot }
+from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDecMHTDApBmGLVpS9AmyiRkQhShmUZ6dE",
@@ -430,13 +116,9 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-let currentRole = null;
-
-/* LOGIN */
 window.login = async function(){
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
-
   try{
     await signInWithEmailAndPassword(auth,email,password);
   }catch(err){
@@ -444,289 +126,71 @@ window.login = async function(){
   }
 };
 
-/* LOGOUT */
-window.logout = function(){
-  signOut(auth);
-};
+window.logout = function(){ signOut(auth); };
 
-/* AUTH STATE */
-onAuthStateChanged(auth, async (user)=>{
+onAuthStateChanged(auth, (user)=>{
   if(user){
     document.getElementById("loginSection").classList.add("hidden");
     document.getElementById("appSection").classList.remove("hidden");
-
     document.getElementById("roleDisplay").innerText =
       "Logged in as: " + user.email;
-
-    loadClients();          // call ONCE
-    showTab('listTab');
-
-  } else {
+    loadClients();
+    showTab('dashboardTab');
+  }else{
     document.getElementById("loginSection").classList.remove("hidden");
     document.getElementById("appSection").classList.add("hidden");
   }
 });
 
-/* SAVE CLIENT */
-
-window.saveClient = async function(){
-
-const services = [];
-
-document.querySelectorAll(".svcCheck").forEach((checkbox, index)=>{
-  if(checkbox.checked){
-    const amount = document.querySelectorAll(".svcAmount")[index].value || 0;
-
-    services.push({
-      name: checkbox.value,
-      amount: Number(amount)
-    });
-  }
-});
-
-  const clientData = {
-    client: document.getElementById("clientName").value,
-    status: document.getElementById("status").value,
-    navigator: document.getElementById("navigator").value,
-    medicaid: document.getElementById("medicaid").value,
-    medicaidLevel: document.getElementById("medicaidLevel").value,
-    eligibilityDate: document.getElementById("eligibilityDate").value,
-    followUpDate: document.getElementById("followUpDate").value,
-    eligibilityUnits: Number(document.getElementById("eligibilityUnits").value || 0),
-    serviceUnits: Number(document.getElementById("serviceUnits").value || 0),
-    services: services,
-    createdAt: new Date()
-  };
-
-  if(window.editingId){
-    await updateDoc(doc(db,"clients",window.editingId), clientData);
-    window.editingId = null;
-  } else {
-    await addDoc(collection(db,"clients"), clientData);
-  }
-
-
-  document.getElementById("clientName").value = "";
-  document.getElementById("status").value = "Open";
-  document.getElementById("navigator").selectedIndex = 0;
-  document.getElementById("medicaid").selectedIndex = 0;
-  document.getElementById("medicaidLevel").selectedIndex = 0;
-  document.getElementById("eligibilityDate").value = "";
-  document.getElementById("followUpDate").value = "";
-  document.getElementById("eligibilityUnits").value = "";
-  document.getElementById("serviceUnits").value = "";
-
-  document.querySelectorAll(".svcCheck").forEach(cb => cb.checked = false);
-  document.querySelectorAll(".svcAmount").forEach(input => input.value = "");
-
-  calculateTotals();
-};
-
-window.deleteClient = async function(id){
-  if(confirm("Delete this client?")){
-    await deleteDoc(doc(db,"clients",id));
-  }
-};
-
-window.editClient = async function(id){
-
-  const snap = await getDoc(doc(db,"clients",id));
-  const data = snap.data();
-
-  document.getElementById("clientName").value = data.client;
-  document.getElementById("status").value = data.status;
-  document.getElementById("navigator").value = data.navigator;
-  document.getElementById("medicaid").value = data.medicaid;
-  document.getElementById("medicaidLevel").value = data.medicaidLevel;
-  document.getElementById("eligibilityDate").value = data.eligibilityDate;
-  document.getElementById("followUpDate").value = data.followUpDate;
-  document.getElementById("eligibilityUnits").value = data.eligibilityUnits;
-  document.getElementById("serviceUnits").value = data.serviceUnits;
-
- document.querySelectorAll(".svcCheck").forEach((cb, index)=>{
-  const match = (data.services || []).find(s => s.name === cb.value);
-  cb.checked = !!match;
-
-  if(match){
-    document.querySelectorAll(".svcAmount")[index].value = match.amount;
-  }
-});
-
-  window.editingId = id;
-};
-
-window.importHistorical = async function(){
-
-  const fileInput = document.getElementById("csvFile");
-  const file = fileInput.files[0];
-
-  if(!file){
-    alert("Please select a CSV file first.");
-    return;
-  }
-
-  const text = await file.text();
-  const rows = text.split("\n").slice(1); // skip header row
-
-  for(const row of rows){
-
-    if(!row.trim()) continue;
-
-    const cols = row.split(",");
-
-    const clientData = {
-      client: cols[0]?.trim(),              // Client Name
-      status: "Open",
-      navigator: cols[1]?.trim(),           // Staff name
-      medicaid: "",
-      medicaidLevel: "",
-      eligibilityDate: cols[6]?.trim(),     // Eligibility Assessment Date
-      followUpDate: cols[3]?.trim(),        // Screening Date
-      eligibilityUnits: Number(cols[5]) || 0,
-      serviceUnits: Number(cols[8]) || 0,
-      services: [],
-      createdAt: new Date()
-    };
-
-    await addDoc(collection(db,"clients"), clientData);
-  }
-
-  alert("Import completed successfully!");
-};
-
-/* LIVE SYNC */
 window.showTab = function(tabId){
-
-window.calculateTotals = function(){
-
-  const rate = 17.50;
-
-  const eligibilityUnits = Number(document.getElementById("eligibilityUnits").value || 0);
-  const serviceUnits = Number(document.getElementById("serviceUnits").value || 0);
-
-  const eligibilityAmount = eligibilityUnits * rate;
-  const serviceAmount = serviceUnits * rate;
-
-  const navigationSubtotal = eligibilityAmount + serviceAmount;
-
-let supportSubtotal = 0;
-
-document.querySelectorAll(".svcAmount").forEach(input=>{
-  supportSubtotal += Number(input.value || 0);
-});
-
-  const grandTotal = navigationSubtotal + supportSubtotal;
-
-  document.getElementById("eligibilityTotal").innerText =
-    "$" + eligibilityAmount.toFixed(2);
-
-  document.getElementById("serviceTotal").innerText =
-    "$" + serviceAmount.toFixed(2);
-
-  document.getElementById("navigationTotal").innerText =
-    "$" + navigationSubtotal.toFixed(2);
-
-  document.getElementById("supportTotal").innerText =
-    "$" + supportSubtotal.toFixed(2);
-
-  document.getElementById("grandTotal").innerText =
-    "$" + grandTotal.toFixed(2);
-};
-
-window.formatCurrencyInput = function(input){
-
-  let value = input.value.replace(/[^0-9.]/g, "");
-
-  if(value === ""){
-    input.value = "";
-    calculateTotals();
-    return;
-  }
-
-  let number = parseFloat(value);
-
-  if(isNaN(number)){
-    input.value = "";
-  } else {
-    input.value = number.toFixed(2);
-  }
-
-  calculateTotals();
+  document.querySelectorAll(".tabSection").forEach(s=>s.classList.remove("active"));
+  document.getElementById(tabId).classList.add("active");
 };
 
 function loadClients(){
-
   const tableBody = document.getElementById("clientTableBody");
   const navCounts = {};
 
   onSnapshot(collection(db,"clients"), (snapshot)=>{
-
     tableBody.innerHTML = "";
 
     snapshot.forEach((doc)=>{
       const data = doc.data();
-      console.log("Client record:", data);
 
-      navCounts[data.navigator] = (navCounts[data.navigator] || 0) + 1;
+      navCounts[data.navigator] =
+        (navCounts[data.navigator] || 0) + 1;
 
-      const row = `
+      tableBody.innerHTML += `
         <tr>
           <td>${data.client || ""}</td>
           <td>${data.navigator || ""}</td>
           <td>${data.status || ""}</td>
-          <td>${(data.eligibilityUnits || 0) + (data.serviceUnits || 0)}</td>
-          <td>${
-            (data.services || [])
-              .map(s => s.name + " ($" + s.amount + ")")
-              .join(", ")
-          }</td>
-          <td>
-            <button onclick="editClient('${doc.id}')">Edit</button>
-            <button onclick="deleteClient('${doc.id}')">Delete</button>
-          </td>
         </tr>
       `;
-
-      tableBody.innerHTML += row;
     });
 
     const ctx = document.getElementById("navChart");
-
     if(window.navChartInstance){
       window.navChartInstance.destroy();
     }
 
-    window.navChartInstance = new Chart(ctx, {
-      type: "bar",
-      data: {
-        labels: Object.keys(navCounts),
-        datasets: [{
-          label: "Clients per Navigator",
-          data: Object.values(navCounts)
+    window.navChartInstance = new Chart(ctx,{
+      type:"bar",
+      data:{
+        labels:Object.keys(navCounts),
+        datasets:[{
+          label:"Clients per Navigator",
+          data:Object.values(navCounts)
         }]
       },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { display: false }
-        }
-      }
+      options:{ responsive:true }
     });
 
   });
-
 }
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
 
 
 
