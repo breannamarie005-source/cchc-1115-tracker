@@ -530,9 +530,14 @@ window.editClient = async function(id){
   document.getElementById("eligibilityUnits").value = data.eligibilityUnits;
   document.getElementById("serviceUnits").value = data.serviceUnits;
 
-  document.querySelectorAll(".svc").forEach(cb=>{
-    cb.checked = (data.services || []).includes(cb.value);
-  });
+ document.querySelectorAll(".svcCheck").forEach((cb, index)=>{
+  const match = (data.services || []).find(s => s.name === cb.value);
+  cb.checked = !!match;
+
+  if(match){
+    document.querySelectorAll(".svcAmount")[index].value = match.amount;
+  }
+});
 
   window.editingId = id;
 };
@@ -686,6 +691,7 @@ function loadClients(){
 </script>
 </body>
 </html>
+
 
 
 
