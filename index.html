@@ -589,6 +589,13 @@ window.showTab = function(tabId){
   });
 
   document.getElementById(tabId).classList.add("active");
+
+  // Force table redraw when opening Client List
+  if(tabId === "listTab"){
+    const tableBody = document.getElementById("clientTableBody");
+    tableBody.innerHTML = tableBody.innerHTML;
+  }
+
 };
 
 window.calculateTotals = function(){
@@ -712,6 +719,7 @@ function loadClients(){
 </script>
 </body>
 </html>
+
 
 
 
