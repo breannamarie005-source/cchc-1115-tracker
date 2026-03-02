@@ -597,20 +597,6 @@ window.importHistorical = async function(){
 /* LIVE SYNC */
 window.showTab = function(tabId){
 
-  document.querySelectorAll(".tabSection").forEach(section=>{
-    section.classList.remove("active");
-  });
-
-  document.getElementById(tabId).classList.add("active");
-
-  // Force table redraw when opening Client List
-  if(tabId === "listTab"){
-    const tableBody = document.getElementById("clientTableBody");
-    tableBody.innerHTML = tableBody.innerHTML;
-  }
-
-};
-
 window.calculateTotals = function(){
 
   const rate = 17.50;
@@ -733,6 +719,7 @@ function loadClients(){
 </script>
 </body>
 </html>
+
 
 
 
