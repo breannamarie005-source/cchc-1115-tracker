@@ -441,16 +441,14 @@ onAuthStateChanged(auth, async (user)=>{
   if(user){
     document.getElementById("loginSection").classList.add("hidden");
     document.getElementById("appSection").classList.remove("hidden");
-loadClients();
-document.getElementById("roleDisplay").innerText = 
-  "Logged in as: " + user.email;
 
+    document.getElementById("roleDisplay").innerText =
+      "Logged in as: " + user.email;
 
+    loadClients();          // call ONCE
+    showTab('dashboardTab');
 
-    loadClients();
-showTab('dashboardTab');
-
-  }else{
+  } else {
     document.getElementById("loginSection").classList.remove("hidden");
     document.getElementById("appSection").classList.add("hidden");
   }
@@ -707,5 +705,6 @@ const row = `
 </script>
 </body>
 </html>
+
 
 
