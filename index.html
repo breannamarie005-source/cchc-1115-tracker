@@ -78,7 +78,30 @@ button{
     <canvas id="navChart"></canvas>
   </div>
 </div>
+window.saveClient = async function(){
 
+  const clientName = document.getElementById("clientName").value;
+  const status = document.getElementById("status").value;
+  const navigator = document.getElementById("navigator").value;
+
+  if(!clientName){
+    alert("Please enter a client name.");
+    return;
+  }
+
+  await addDoc(collection(db,"clients"),{
+    client: clientName,
+    status: status,
+    navigator: navigator,
+    createdAt: new Date()
+  });
+
+  document.getElementById("clientName").value = "";
+  document.getElementById("status").value = "Open";
+  document.getElementById("navigator").selectedIndex = 0;
+
+  alert("Client saved successfully!");
+};
 <div id="listTab" class="tabSection">
   <div class="card">
     <h3>Client List</h3>
@@ -193,6 +216,7 @@ function loadClients(){
 </script>
 </body>
 </html>
+
 
 
 
