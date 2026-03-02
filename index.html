@@ -78,30 +78,31 @@ button{
     <canvas id="navChart"></canvas>
   </div>
 </div>
-window.saveClient = async function(){
+<div id="entryTab" class="tabSection">
+  <div class="card">
+    <h3>Client Entry</h3>
 
-  const clientName = document.getElementById("clientName").value;
-  const status = document.getElementById("status").value;
-  const navigator = document.getElementById("navigator").value;
+    <label>Client Name</label><br>
+    <input id="clientName" style="width:100%;padding:8px;"><br><br>
 
-  if(!clientName){
-    alert("Please enter a client name.");
-    return;
-  }
+    <label>Status</label><br>
+    <select id="status" style="width:100%;padding:8px;">
+      <option>Open</option>
+      <option>Closed</option>
+    </select><br><br>
 
-  await addDoc(collection(db,"clients"),{
-    client: clientName,
-    status: status,
-    navigator: navigator,
-    createdAt: new Date()
-  });
+    <label>Navigator</label><br>
+    <select id="navigator" style="width:100%;padding:8px;">
+      <option>Breanna Shelanskey</option>
+      <option>Kylie Miles</option>
+      <option>Alexandra Dieffenbacher</option>
+      <option>Laurie Davis</option>
+      <option>Shauna Cone</option>
+    </select><br><br>
 
-  document.getElementById("clientName").value = "";
-  document.getElementById("status").value = "Open";
-  document.getElementById("navigator").selectedIndex = 0;
-
-  alert("Client saved successfully!");
-};
+    <button onclick="saveClient()">Save Client</button>
+  </div>
+</div>
 <div id="listTab" class="tabSection">
   <div class="card">
     <h3>Client List</h3>
@@ -216,6 +217,7 @@ function loadClients(){
 </script>
 </body>
 </html>
+
 
 
 
