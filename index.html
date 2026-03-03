@@ -185,65 +185,86 @@ button{
 
     <h4>Support Services</h4>
 
-    <div>
-  <input type="checkbox" class="svcCheck" value="Rent">
-  Rent $
+
+ <div class="service-row">
+  <div>
+    <input type="checkbox" class="svcCheck" value="Rent">
+    Rent
+  </div>
   <input type="number" class="svcAmount" oninput="calculateTotals()">
 </div>
 
-<div>
-  <input type="checkbox" class="svcCheck" value="Utilities">
-  Utilities $
+<div class="service-row">
+  <div>
+    <input type="checkbox" class="svcCheck" value="Utilities">
+    Utilities
+  </div>
   <input type="number" class="svcAmount" oninput="calculateTotals()">
 </div>
 
-<div>
-  <input type="checkbox" class="svcCheck" value="Pre-Tenancy">
-  Pre-Tenancy $
+<div class="service-row">
+  <div>
+    <input type="checkbox" class="svcCheck" value="Pre-Tenancy">
+    Pre-Tenancy
+  </div>
   <input type="number" class="svcAmount" oninput="calculateTotals()">
 </div>
 
-<div>
-  <input type="checkbox" class="svcCheck" value="Microwave">
-  Microwave $
+<div class="service-row">
+  <div>
+    <input type="checkbox" class="svcCheck" value="Microwave">
+    Microwave
+  </div>
   <input type="number" class="svcAmount" oninput="calculateTotals()">
 </div>
 
-<div>
-  <input type="checkbox" class="svcCheck" value="Fridge">
-  Fridge $
+<div class="service-row">
+  <div>
+    <input type="checkbox" class="svcCheck" value="Fridge">
+    Fridge
+  </div>
   <input type="number" class="svcAmount" oninput="calculateTotals()">
 </div>
 
-<div>
-  <input type="checkbox" class="svcCheck" value="Nutrition">
-  Nutrition $
+<div class="service-row">
+  <div>
+    <input type="checkbox" class="svcCheck" value="Nutrition">
+    Nutrition
+  </div>
   <input type="number" class="svcAmount" oninput="calculateTotals()">
 </div>
 
-<div>
-  <input type="checkbox" class="svcCheck" value="Follow Up">
-  Follow Up $
+<div class="service-row">
+  <div>
+    <input type="checkbox" class="svcCheck" value="Follow Up">
+    Follow Up
+  </div>
   <input type="number" class="svcAmount" oninput="calculateTotals()">
 </div>
     
-    <div>
-      <input type="checkbox" class="svcCheck" value="Epicured">
-      Epicured $
-      <input type="number" class="svcAmount" oninput="calculateTotals()">
-    </div>
+    <div class="service-row">
+  <div>
+    <input type="checkbox" class="svcCheck" value="Epicured">
+    Epicured
+  </div>
+  <input type="number" class="svcAmount" oninput="calculateTotals()">
+</div>
 
-    <div>
-      <input type="checkbox" class="svcCheck" value="Kitchenware">
-      Kitchenware $
-      <input type="number" class="svcAmount" oninput="calculateTotals()">
-    </div>
+    <div class="service-row">
+  <div>
+    <input type="checkbox" class="svcCheck" value="Kitchenware">
+    Kitchenware
+  </div>
+  <input type="number" class="svcAmount" oninput="calculateTotals()">
+</div>
 
-    <div>
-      <input type="checkbox" class="svcCheck" value="Transportation">
-      Transportation $
-      <input type="number" class="svcAmount" oninput="calculateTotals()">
-    </div>
+    <div class="service-row">
+  <div>
+    <input type="checkbox" class="svcCheck" value="Transportation">
+    Transportation
+  </div>
+  <input type="number" class="svcAmount" oninput="calculateTotals()">
+</div>
 
     <br>
     <div><strong>Support Total: </strong><span id="supportTotal">$0.00</span></div>
@@ -443,6 +464,7 @@ function loadClients(){
 </script>
 </body>
 </html>
+
 
 
 
