@@ -100,28 +100,63 @@ button{
       <option>Shauna Cone</option>
     </select><br><br>
 
+    <label>Medicaid Type</label><br>
+    <select id="medicaid" style="width:100%;padding:8px;">
+      <option>MCO</option>
+      <option>Fee for Service</option>
+      <option>Not in Enhanced Population</option>
+      <option>No Needs</option>
+    </select><br><br>
+
+    <label>Medicaid Level</label><br>
+    <input id="medicaidLevel" style="width:100%;padding:8px;"><br><br>
+
+    <label>Eligibility Date</label><br>
+    <input type="date" id="eligibilityDate" style="width:100%;padding:8px;"><br><br>
+
+    <label>Follow Up Date</label><br>
+    <input type="date" id="followUpDate" style="width:100%;padding:8px;"><br><br>
+
+    <hr>
+
     <label>Eligibility Units</label><br>
-    <input type="number" id="eligibilityUnits" style="width:100%;padding:8px;"><br><br>
+    <input type="number" id="eligibilityUnits" oninput="calculateTotals()" style="width:100%;padding:8px;"><br>
+    <div id="eligibilityTotal">$0.00</div><br>
 
     <label>Service Units</label><br>
-    <input type="number" id="serviceUnits" style="width:100%;padding:8px;"><br><br>
+    <input type="number" id="serviceUnits" oninput="calculateTotals()" style="width:100%;padding:8px;"><br>
+    <div id="serviceTotal">$0.00</div><br>
 
+    <div><strong>Navigation Total: </strong><span id="navigationTotal">$0.00</span></div>
+
+    <hr>
+
+    <h4>Support Services</h4>
+
+    <div>
+      <input type="checkbox" class="svcCheck" value="Epicured">
+      Epicured $
+      <input type="number" class="svcAmount" oninput="calculateTotals()">
+    </div>
+
+    <div>
+      <input type="checkbox" class="svcCheck" value="Kitchenware">
+      Kitchenware $
+      <input type="number" class="svcAmount" oninput="calculateTotals()">
+    </div>
+
+    <div>
+      <input type="checkbox" class="svcCheck" value="Transportation">
+      Transportation $
+      <input type="number" class="svcAmount" oninput="calculateTotals()">
+    </div>
+
+    <br>
+    <div><strong>Support Total: </strong><span id="supportTotal">$0.00</span></div>
+    <div><strong>Grand Total: </strong><span id="grandTotal">$0.00</span></div>
+
+    <br><br>
     <button onclick="saveClient()">Save Client</button>
-  </div>
-</div>
-<div id="listTab" class="tabSection">
-  <div class="card">
-    <h3>Client List</h3>
-    <table id="clientTable" style="width:100%;border-collapse:collapse;">
-      <thead>
-        <tr>
-          <th>Client</th>
-          <th>Navigator</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody id="clientTableBody"></tbody>
-    </table>
   </div>
 </div>
 
@@ -271,6 +306,7 @@ function loadClients(){
 </script>
 </body>
 </html>
+
 
 
 
