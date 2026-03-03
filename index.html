@@ -186,7 +186,66 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
-  
+
+  window.calculateTotals = function(){
+
+  const rate = 17.50;
+
+  const eligibilityUnits = Number(document.getElementById("eligibilityUnits").value || 0);
+  const serviceUnits = Number(document.getElementById("serviceUnits").value || 0);
+
+  const eligibilityAmount = eligibilityUnits * rate;
+  const serviceAmount = serviceUnits * rate;
+
+  const navigationTotal = eligibilityAmount + serviceAmount;
+
+  let supportTotal = 0;
+
+  document.querySelectorAll(".svcAmount").forEach(input=>{
+    supportTotal += Number(input.value || 0);
+  });
+
+  const grandTotal = navigationTotal + supportTotal;
+
+  document.getElementById("eligibilityTotal").innerText = "$" + eligibilityAmount.toFixed(2);
+  document.getElementById("serviceTotal").innerText = "$" + serviceAmount.toFixed(2);
+  document.getElementById("navigationTotal").innerText = "$" + navigationTotal.toFixed(2);
+  document.getElementById("supportTotal").innerText = "$" + supportTotal.toFixed(2);
+  document.getElementById("grandTotal").innerText = "$" + grandTotal.toFixed(2);
+};
+  window.saveClient = async function(){
+
+  const services = [];
+
+  document.querySelectorAll(".svcCheck").forEach((checkbox, index)=>{
+    if(checkbox.checked){
+      const amount = document.querySelectorAll(".svcAmount")[index].value || 0;
+
+      services.push({
+        name: checkbox.value,
+        amount: Number(amount)
+      });
+    }
+  });
+
+  const clientData = {
+    client: document.getElementById("clientName").value,
+    status: document.getElementById("status").value,
+    navigator: document.getElementById("navigator").value,
+    medicaid: document.getElementById("medicaid").value,
+    medicaidLevel: document.getElementById("medicaidLevel").value,
+    eligibilityDate: document.getElementById("eligibilityDate").value,
+    followUpDate: document.getElementById("followUpDate").value,
+    eligibilityUnits: Number(document.getElementById("eligibilityUnits").value || 0),
+    serviceUnits: Number(document.getElementById("serviceUnits").value || 0),
+    services: services,
+    createdAt: new Date()
+  };
+
+  await addDoc(collection(db,"clients"), clientData);
+
+  alert("Client saved successfully!");
+};
 window.saveClient = async function(){
 
   const clientName = document.getElementById("clientName").value;
@@ -306,6 +365,7 @@ function loadClients(){
 </script>
 </body>
 </html>
+
 
 
 
