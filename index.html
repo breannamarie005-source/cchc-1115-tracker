@@ -227,39 +227,7 @@ const db = getFirestore(app);
   document.getElementById("supportTotal").innerText = "$" + supportTotal.toFixed(2);
   document.getElementById("grandTotal").innerText = "$" + grandTotal.toFixed(2);
 };
-  window.saveClient = async function(){
-
-  const services = [];
-
-  document.querySelectorAll(".svcCheck").forEach((checkbox, index)=>{
-    if(checkbox.checked){
-      const amount = document.querySelectorAll(".svcAmount")[index].value || 0;
-
-      services.push({
-        name: checkbox.value,
-        amount: Number(amount)
-      });
-    }
-  });
-
-  const clientData = {
-    client: document.getElementById("clientName").value,
-    status: document.getElementById("status").value,
-    navigator: document.getElementById("navigator").value,
-    medicaid: document.getElementById("medicaid").value,
-    medicaidLevel: document.getElementById("medicaidLevel").value,
-    eligibilityDate: document.getElementById("eligibilityDate").value,
-    followUpDate: document.getElementById("followUpDate").value,
-    eligibilityUnits: Number(document.getElementById("eligibilityUnits").value || 0),
-    serviceUnits: Number(document.getElementById("serviceUnits").value || 0),
-    services: services,
-    createdAt: new Date()
-  };
-
-  await addDoc(collection(db,"clients"), clientData);
-
-  alert("Client saved successfully!");
-};
+ 
 window.saveClient = async function(){
 
   const clientName = document.getElementById("clientName").value;
@@ -379,6 +347,7 @@ function loadClients(){
 </script>
 </body>
 </html>
+
 
 
 
