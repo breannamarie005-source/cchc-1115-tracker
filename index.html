@@ -132,8 +132,12 @@ button{
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut }
 from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
-import { getFirestore, collection, onSnapshot }
-from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
+import { 
+  getFirestore, 
+  collection, 
+  onSnapshot,
+  addDoc 
+} from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDecMHTDApBmGLVpS9AmyiRkQhShmUZ6dE",
@@ -231,6 +235,7 @@ function loadClients(){
 </script>
 </body>
 </html>
+
 
 
 
