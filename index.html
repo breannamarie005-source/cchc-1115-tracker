@@ -151,7 +151,43 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
+  
+window.saveClient = async function(){
 
+  const clientName = document.getElementById("clientName").value;
+  const status = document.getElementById("status").value;
+  const navigator = document.getElementById("navigator").value;
+  const eligibilityUnits = Number(document.getElementById("eligibilityUnits").value || 0);
+  const serviceUnits = Number(document.getElementById("serviceUnits").value || 0);
+
+  if(!clientName){
+    alert("Please enter a client name.");
+    return;
+  }
+
+  try {
+    await addDoc(collection(db,"clients"),{
+      client: clientName,
+      status: status,
+      navigator: navigator,
+      eligibilityUnits: eligibilityUnits,
+      serviceUnits: serviceUnits,
+      createdAt: new Date()
+    });
+
+    alert("Client saved successfully!");
+
+    document.getElementById("clientName").value = "";
+    document.getElementById("status").value = "Open";
+    document.getElementById("navigator").selectedIndex = 0;
+    document.getElementById("eligibilityUnits").value = "";
+    document.getElementById("serviceUnits").value = "";
+
+  } catch(err){
+    console.error("Save error:", err);
+    alert("Error saving client. Check console.");
+  }
+};
 window.login = async function(){
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
@@ -235,6 +271,7 @@ function loadClients(){
 </script>
 </body>
 </html>
+
 
 
 
