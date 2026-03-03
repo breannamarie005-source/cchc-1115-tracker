@@ -42,6 +42,50 @@ button{
   padding:8px;
   border-bottom:1px solid rgba(255,255,255,0.1);
 }
+  .section-divider {
+  margin: 25px 0;
+  border-top: 1px solid rgba(255,255,255,0.15);
+}
+
+.entry-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.entry-full {
+  grid-column: span 2;
+}
+
+.service-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.service-row input[type="number"] {
+  width: 120px;
+  padding: 6px;
+  border-radius: 6px;
+}
+
+.total-box {
+  background: rgba(30,111,217,0.15);
+  padding: 10px 15px;
+  border-radius: 10px;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.grand-box {
+  background: linear-gradient(90deg, rgba(30,111,217,0.3), rgba(0,150,255,0.3));
+  padding: 14px 18px;
+  border-radius: 12px;
+  margin-top: 15px;
+  font-size: 18px;
+  font-weight: bold;
+}
 </style>
 </head>
 <body>
@@ -395,6 +439,7 @@ function loadClients(){
 </script>
 </body>
 </html>
+
 
 
 
