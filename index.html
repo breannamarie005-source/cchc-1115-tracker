@@ -638,7 +638,7 @@ function loadClients(){
 
   const tableBody = document.getElementById("clientTableBody");
   const navCounts = {};
-
+  const navRevenue = {};
   let totalClients = 0;
   let totalUnits = 0;
   let totalRevenue = 0;
@@ -667,6 +667,17 @@ function loadClients(){
 
       navCounts[data.navigator] =
         (navCounts[data.navigator] || 0) + 1;
+      const navigatorName = data.navigator || "Unknown";
+
+if(!navRevenue[navigatorName]){
+  navRevenue[navigatorName] = 0;
+}
+
+navRevenue[navigatorName] += units * 17.5;
+
+(data.services || []).forEach(s=>{
+  navRevenue[navigatorName] += Number(s.amount || 0);
+});
 
       const servicesList = (data.services || [])
         .map(s => `${s.name} ($${s.amount})`)
@@ -719,6 +730,24 @@ function loadClients(){
   });
 
 }
+  const revenueCtx = document.getElementById("revenueChart");
+
+if(window.revenueChartInstance){
+  window.revenueChartInstance.destroy();
+}
+
+window.revenueChartInstance = new Chart(revenueCtx,{
+  type:"bar",
+  data:{
+    labels:Object.keys(navRevenue),
+    datasets:[{
+      label:"Revenue per Navigator",
+      data:Object.values(navRevenue)
+    }]
+  },
+  options:{ responsive:true }
+});
+  
   window.filterTable = function(){
 
 const clientFilter = document.getElementById("filterClient").value;
@@ -778,6 +807,7 @@ navSelect.innerHTML += `<option>${v}</option>`;
 </script>
 </body>
 </html>
+
 
 
 
