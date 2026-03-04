@@ -601,7 +601,11 @@ tableBody.innerHTML += `
   </tr>
 `;
     });
+  
+    populateFilters();   // ← PASTE IT HERE
 
+  });
+}
     const ctx = document.getElementById("navChart");
     if(window.navChartInstance){
       window.navChartInstance.destroy();
@@ -678,6 +682,7 @@ navSelect.innerHTML += `<option>${v}</option>`;
 </script>
 </body>
 </html>
+
 
 
 
