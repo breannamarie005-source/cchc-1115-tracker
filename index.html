@@ -646,6 +646,19 @@ let totalRevenue = 0;
     snapshot.forEach((doc)=>{
 
       const data = doc.data();
+      totalClients++;
+
+const units =
+  (data.eligibilityUnits || 0) +
+  (data.serviceUnits || 0);
+
+totalUnits += units;
+
+totalRevenue += units * 17.5;
+
+(data.services || []).forEach(s=>{
+  totalRevenue += Number(s.amount || 0);
+});
 
       navCounts[data.navigator] =
         (navCounts[data.navigator] || 0) + 1;
@@ -757,6 +770,7 @@ navSelect.innerHTML += `<option>${v}</option>`;
 </script>
 </body>
 </html>
+
 
 
 
