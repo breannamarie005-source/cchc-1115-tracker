@@ -700,7 +700,17 @@ if(!navRevenue[navigatorName]){
 navRevenue[navigatorName] += units * 17.5;
 
 (data.services || []).forEach(s=>{
-  navRevenue[navigatorName] += Number(s.amount || 0);
+
+  const amount = Number(s.amount || 0);
+
+  navRevenue[navigatorName] += amount;
+
+  if(!serviceRevenue[s.name]){
+    serviceRevenue[s.name] = 0;
+  }
+
+  serviceRevenue[s.name] += amount;
+
 });
 
       const servicesList = (data.services || [])
@@ -867,6 +877,7 @@ pdf.save("CCHC_1115_Report.pdf");
 </script>
 </body>
 </html>
+
 
 
 
