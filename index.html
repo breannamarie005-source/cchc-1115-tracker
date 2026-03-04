@@ -370,7 +370,36 @@ window.saveClient = async function(){
     serviceUnits: serviceUnits,
     services: services
   });
+window.editClient = async function(id){
 
+  const snap = await getDoc(doc(db, "clients", id));
+  const data = snap.data();
+
+  document.getElementById("clientName").value = data.client || "";
+  document.getElementById("status").value = data.status || "Open";
+  document.getElementById("navigator").value = data.navigator || "";
+  document.getElementById("medicaid").value = data.medicaid || "";
+  document.getElementById("medicaidLevel").value = data.medicaidLevel || "";
+  document.getElementById("eligibilityDate").value = data.eligibilityDate || "";
+  document.getElementById("followUpDate").value = data.followUpDate || "";
+  document.getElementById("eligibilityUnits").value = data.eligibilityUnits || "";
+  document.getElementById("serviceUnits").value = data.serviceUnits || "";
+
+  document.querySelectorAll(".svcCheck").forEach((checkbox, index)=>{
+    const match = (data.services || []).find(s => s.name === checkbox.value);
+    checkbox.checked = !!match;
+
+    if(match){
+      document.querySelectorAll(".svcAmount")[index].value = match.amount;
+    } else {
+      document.querySelectorAll(".svcAmount")[index].value = "";
+    }
+  });
+
+  window.editingId = id;
+
+  showTab("entryTab");
+};
   window.editingId = null;
 
 } else {
@@ -503,6 +532,7 @@ tableBody.innerHTML += `
 </script>
 </body>
 </html>
+
 
 
 
