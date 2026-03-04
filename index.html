@@ -486,7 +486,26 @@ window.saveClient = async function(){
   }
 };
 
+function clearClientForm(){
 
+document.getElementById("clientName").value = "";
+document.getElementById("status").value = "Open";
+document.getElementById("navigator").selectedIndex = 0;
+document.getElementById("medicaid").selectedIndex = 0;
+document.getElementById("medicaidLevel").selectedIndex = 0;
+document.getElementById("eligibilityDate").value = "";
+document.getElementById("followUpDate").value = "";
+document.getElementById("eligibilityUnits").value = "";
+document.getElementById("serviceUnits").value = "";
+
+document.querySelectorAll(".svcCheck").forEach(cb => cb.checked = false);
+document.querySelectorAll(".svcAmount").forEach(input => input.value = "");
+
+calculateTotals();
+
+window.editingId = null;
+
+}
 /* EDIT CLIENT */
 
 window.editClient = async function(id){
@@ -702,6 +721,7 @@ navSelect.innerHTML += `<option>${v}</option>`;
 </script>
 </body>
 </html>
+
 
 
 
