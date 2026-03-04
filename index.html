@@ -473,12 +473,7 @@ window.saveClient = async function(){
     }
 
     alert("Client saved successfully!");
-
-    document.getElementById("clientName").value = "";
-    document.getElementById("status").value = "Open";
-    document.getElementById("navigator").selectedIndex = 0;
-    document.getElementById("eligibilityUnits").value = "";
-    document.getElementById("serviceUnits").value = "";
+clearClientForm();
 
   }catch(err){
     console.error("Save error:", err);
@@ -721,6 +716,7 @@ navSelect.innerHTML += `<option>${v}</option>`;
 </script>
 </body>
 </html>
+
 
 
 
