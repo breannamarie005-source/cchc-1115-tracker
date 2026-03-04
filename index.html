@@ -343,7 +343,7 @@ const db = getFirestore(app);
   document.getElementById("grandTotal").innerText = "$" + grandTotal.toFixed(2);
 };
  
-**window.saveClient = async function(){
+window.saveClient = async function(){
 
   const clientName = document.getElementById("clientName").value;
   const status = document.getElementById("status").value;
@@ -351,25 +351,78 @@ const db = getFirestore(app);
   const eligibilityUnits = Number(document.getElementById("eligibilityUnits").value || 0);
   const serviceUnits = Number(document.getElementById("serviceUnits").value || 0);
 
+  const services = [];
+
+  document.querySelectorAll(".svcCheck").forEach((checkbox, index)=>{
+    if(checkbox.checked){
+      const amount = document.querySelectorAll(".svcAmount")[index].value || 0;
+
+      services.push({
+        name: checkbox.value,
+        amount: Number(amount)
+      });
+    }
+  });
+
   if(!clientName){
     alert("Please enter a client name.");
     return;
   }
 
-  if(window.editingId){
+  try{
 
-  await updateDoc(doc(db,"clients",window.editingId),{
-    client: clientName,
-    status: status,
-    navigator: navigator,
-    medicaid: document.getElementById("medicaid").value,
-    medicaidLevel: document.getElementById("medicaidLevel").value,
-    eligibilityDate: document.getElementById("eligibilityDate").value,
-    followUpDate: document.getElementById("followUpDate").value,
-    eligibilityUnits: eligibilityUnits,
-    serviceUnits: serviceUnits,
-    services: services
-  });
+    if(window.editingId){
+
+      await updateDoc(doc(db,"clients",window.editingId),{
+        client: clientName,
+        status: status,
+        navigator: navigator,
+        medicaid: document.getElementById("medicaid").value,
+        medicaidLevel: document.getElementById("medicaidLevel").value,
+        eligibilityDate: document.getElementById("eligibilityDate").value,
+        followUpDate: document.getElementById("followUpDate").value,
+        eligibilityUnits: eligibilityUnits,
+        serviceUnits: serviceUnits,
+        services: services
+      });
+
+      window.editingId = null;
+
+    } else {
+
+      await addDoc(collection(db,"clients"),{
+        client: clientName,
+        status: status,
+        navigator: navigator,
+        medicaid: document.getElementById("medicaid").value,
+        medicaidLevel: document.getElementById("medicaidLevel").value,
+        eligibilityDate: document.getElementById("eligibilityDate").value,
+        followUpDate: document.getElementById("followUpDate").value,
+        eligibilityUnits: eligibilityUnits,
+        serviceUnits: serviceUnits,
+        services: services,
+        createdAt: new Date()
+      });
+
+    }
+
+    alert("Client saved successfully!");
+
+    document.getElementById("clientName").value = "";
+    document.getElementById("status").value = "Open";
+    document.getElementById("navigator").selectedIndex = 0;
+    document.getElementById("eligibilityUnits").value = "";
+    document.getElementById("serviceUnits").value = "";
+
+  }catch(err){
+    console.error("Save error:", err);
+    alert("Error saving client. Check console.");
+  }
+};
+
+
+/* EDIT CLIENT */
+
 window.editClient = async function(id){
 
   const snap = await getDoc(doc(db, "clients", id));
@@ -387,6 +440,7 @@ window.editClient = async function(id){
 
   document.querySelectorAll(".svcCheck").forEach((checkbox, index)=>{
     const match = (data.services || []).find(s => s.name === checkbox.value);
+
     checkbox.checked = !!match;
 
     if(match){
@@ -400,58 +454,6 @@ window.editClient = async function(id){
 
   showTab("entryTab");
 };
-  window.editingId = null;
-
-} else {
-
-if(window.editingId){
-
-  await updateDoc(doc(db,"clients",window.editingId),{
-    client: clientName,
-    status: status,
-    navigator: navigator,
-    medicaid: document.getElementById("medicaid").value,
-    medicaidLevel: document.getElementById("medicaidLevel").value,
-    eligibilityDate: document.getElementById("eligibilityDate").value,
-    followUpDate: document.getElementById("followUpDate").value,
-    eligibilityUnits: eligibilityUnits,
-    serviceUnits: serviceUnits,
-    services: services
-  });
-
-  window.editingId = null;
-
-} else {
-
-  await addDoc(collection(db,"clients"),{
-    client: clientName,
-    status: status,
-    navigator: navigator,
-    medicaid: document.getElementById("medicaid").value,
-    medicaidLevel: document.getElementById("medicaidLevel").value,
-    eligibilityDate: document.getElementById("eligibilityDate").value,
-    followUpDate: document.getElementById("followUpDate").value,
-    eligibilityUnits: eligibilityUnits,
-    serviceUnits: serviceUnits,
-    services: services,
-    createdAt: new Date()
-  });
-
-}
-
-    alert("Client saved successfully!");
-
-    document.getElementById("clientName").value = "";
-    document.getElementById("status").value = "Open";
-    document.getElementById("navigator").selectedIndex = 0;
-    document.getElementById("eligibilityUnits").value = "";
-    document.getElementById("serviceUnits").value = "";
-
-  } catch(err){
-    console.error("Save error:", err);
-    alert("Error saving client. Check console.");
-  }
-**};
 window.login = async function(){
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
@@ -551,6 +553,7 @@ tableBody.innerHTML += `
 </script>
 </body>
 </html>
+
 
 
 
