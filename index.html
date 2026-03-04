@@ -650,9 +650,35 @@ row.style.display = show ? "" : "none";
 });
 
 };
+  function populateFilters(){
+
+const clientSet = new Set();
+const navSet = new Set();
+
+document.querySelectorAll("#clientTableBody tr").forEach(row=>{
+clientSet.add(row.children[0].innerText);
+navSet.add(row.children[1].innerText);
+});
+
+const clientSelect = document.getElementById("filterClient");
+const navSelect = document.getElementById("filterNavigator");
+
+clientSelect.innerHTML = '<option value="">All</option>';
+navSelect.innerHTML = '<option value="">All</option>';
+
+clientSet.forEach(v=>{
+clientSelect.innerHTML += `<option>${v}</option>`;
+});
+
+navSet.forEach(v=>{
+navSelect.innerHTML += `<option>${v}</option>`;
+});
+
+}
 </script>
 </body>
 </html>
+
 
 
 
