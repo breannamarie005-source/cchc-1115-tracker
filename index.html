@@ -726,11 +726,7 @@ navRevenue[navigatorName] += units * 17.5;
       },
       options:{ responsive:true }
     });
-
-  });
-
-}
-  const revenueCtx = document.getElementById("revenueChart");
+const revenueCtx = document.getElementById("revenueChart");
 
 if(window.revenueChartInstance){
   window.revenueChartInstance.destroy();
@@ -746,7 +742,11 @@ window.revenueChartInstance = new Chart(revenueCtx,{
     }]
   },
   options:{ responsive:true }
+  });
+
 });
+}
+
   
   window.filterTable = function(){
 
@@ -807,6 +807,7 @@ navSelect.innerHTML += `<option>${v}</option>`;
 </script>
 </body>
 </html>
+
 
 
 
