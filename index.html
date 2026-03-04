@@ -493,10 +493,25 @@ document.getElementById("followUpDate").value = "";
 document.getElementById("eligibilityUnits").value = "";
 document.getElementById("serviceUnits").value = "";
 
-document.querySelectorAll(".svcCheck").forEach(cb => cb.checked = false);
-document.querySelectorAll(".svcAmount").forEach(input => input.value = "");
+/* CLEAR SERVICES */
 
-calculateTotals();
+document.querySelectorAll(".svcCheck").forEach(cb=>{
+cb.checked = false;
+});
+
+document.querySelectorAll(".svcAmount").forEach(input=>{
+input.value = "";
+});
+
+/* RESET TOTALS */
+
+document.getElementById("eligibilityTotal").innerText = "$0.00";
+document.getElementById("serviceTotal").innerText = "$0.00";
+document.getElementById("navigationTotal").innerText = "$0.00";
+document.getElementById("supportTotal").innerText = "$0.00";
+document.getElementById("grandTotal").innerText = "$0.00";
+
+/* RESET EDIT MODE */
 
 window.editingId = null;
 
@@ -716,6 +731,7 @@ navSelect.innerHTML += `<option>${v}</option>`;
 </script>
 </body>
 </html>
+
 
 
 
