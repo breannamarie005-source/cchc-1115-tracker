@@ -316,6 +316,9 @@ input, select {
 <div id="listTab" class="tabSection">
   <div class="card">
     <h3>Client List</h3>
+    <button onclick="exportExcel()">
+Export Client List
+</button>
     <table id="clientTable" style="width:100%;border-collapse:collapse;">
       <thead>
 
@@ -986,6 +989,7 @@ XLSX.writeFile(workbook,
 </script>
 </body>
 </html>
+
 
 
 
