@@ -404,6 +404,25 @@ window.editClient = async function(id){
 
 } else {
 
+if(window.editingId){
+
+  await updateDoc(doc(db,"clients",window.editingId),{
+    client: clientName,
+    status: status,
+    navigator: navigator,
+    medicaid: document.getElementById("medicaid").value,
+    medicaidLevel: document.getElementById("medicaidLevel").value,
+    eligibilityDate: document.getElementById("eligibilityDate").value,
+    followUpDate: document.getElementById("followUpDate").value,
+    eligibilityUnits: eligibilityUnits,
+    serviceUnits: serviceUnits,
+    services: services
+  });
+
+  window.editingId = null;
+
+} else {
+
   await addDoc(collection(db,"clients"),{
     client: clientName,
     status: status,
@@ -532,6 +551,7 @@ tableBody.innerHTML += `
 </script>
 </body>
 </html>
+
 
 
 
