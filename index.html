@@ -375,15 +375,71 @@ Grand Total: <span id="grandTotal">$0.00</span>
 <table id="clientTable" style="width:100%;border-collapse:collapse;">
 
 <thead>
+
 <tr>
 <th>Client</th>
 <th>Navigator</th>
 <th>Status</th>
+<th>Medicaid</th>
+<th>Level</th>
+<th>Eligibility</th>
+<th>Follow Up</th>
 <th>Units</th>
+<th>Services</th>
 <th>Actions</th>
 </tr>
-</thead>
 
+<tr>
+
+<th>
+<select onchange="filterTable()" id="filterClient">
+<option value="">All</option>
+</select>
+</th>
+
+<th>
+<select onchange="filterTable()" id="filterNavigator">
+<option value="">All</option>
+</select>
+</th>
+
+<th>
+<select onchange="filterTable()" id="filterStatus">
+<option value="">All</option>
+<option>Open</option>
+<option>Closed</option>
+</select>
+</th>
+
+<th>
+<select onchange="filterTable()" id="filterMedicaid">
+<option value="">All</option>
+<option>MCO</option>
+<option>Fee for Service</option>
+<option>Not in Enhanced Population</option>
+<option>No Needs</option>
+</select>
+</th>
+
+<th>
+<select onchange="filterTable()" id="filterLevel">
+<option value="">All</option>
+<option>Level 1 MCO</option>
+<option>Level 2 MCO</option>
+<option>Level 1 FFS</option>
+<option>Level 2 FFS</option>
+</select>
+</th>
+
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+
+</tr>
+
+</thead>
 <tbody id="clientTableBody"></tbody>
 
 </table>
@@ -933,6 +989,7 @@ backgroundColor:"#1e6fd9"
 </script>
 </body>
 </html>
+
 
 
 
