@@ -1101,6 +1101,8 @@ revenue += Number(s.amount || 0);
 
 navCounts[data.navigator] =
 (navCounts[data.navigator] || 0) + 1;
+navRevenue[data.navigator] =
+(navRevenue[data.navigator] || 0) + revenue;  
 
 }
 
@@ -1141,6 +1143,7 @@ backgroundColor:"#1e6fd9"
 </script>
 </body>
 </html>
+
 
 
 
