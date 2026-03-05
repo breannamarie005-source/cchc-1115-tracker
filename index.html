@@ -794,7 +794,12 @@ monthlyRevenue[month] += revenue;
 navCounts[data.navigator]=(navCounts[data.navigator]||0)+1;
 statusCounts[data.status] = (statusCounts[data.status] || 0) + 1;
 navRevenue[data.navigator]=(navRevenue[data.navigator]||0)+revenue;
+medicaidCounts[data.medicaid] =
+(medicaidCounts[data.medicaid] || 0) + 1;
 
+medicaidLevelCounts[data.medicaidLevel] =
+(medicaidLevelCounts[data.medicaidLevel] || 0) + 1;
+  
 tableBody.innerHTML+=`
 <tr>
 <td>${data.client||""}</td>
@@ -1173,6 +1178,7 @@ backgroundColor:"#00b894"
 </script>
 </body>
 </html>
+
 
 
 
