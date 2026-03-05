@@ -117,21 +117,21 @@ overflow-y:auto;
 
 <!-- LOGIN -->
 <div id="loginSection" class="card" style="max-width:400px;margin:auto;margin-top:120px;">
-  <h3>Login</h3>
-  <input id="email" placeholder="Email"><br><br>
-  <input id="password" type="password" placeholder="Password"><br><br>
-  <button onclick="login()">Login</button>
-  <p id="loginError" style="color:red;"></p>
+<h3>Login</h3>
+<input id="email" placeholder="Email"><br><br>
+<input id="password" type="password" placeholder="Password"><br><br>
+<button onclick="login()">Login</button>
+<p id="loginError" style="color:red;"></p>
 </div>
 
 <!-- APP -->
 <div id="appSection" class="hidden">
 
 <div style="margin-bottom:20px;">
-  <button onclick="showTab('dashboardTab')">Dashboard</button>
-  <button onclick="showTab('monthlyTab')">Monthly Performance</button>
-  <button onclick="showTab('entryTab')">Client Entry</button>
-  <button onclick="showTab('listTab')">Client List</button>
+<button onclick="showTab('dashboardTab')">Dashboard</button>
+<button onclick="showTab('monthlyTab')">Monthly Performance</button>
+<button onclick="showTab('entryTab')">Client Entry</button>
+<button onclick="showTab('listTab')">Client List</button>
 </div>
 
 <div class="card">
@@ -140,10 +140,9 @@ overflow-y:auto;
 </div>
 
 <!-- DASHBOARD -->
-<div id="dashboardTab" class="tabSection">
+<div id="dashboardTab" class="tabSection active">
 
 <div class="card">
-
 <h3>Dashboard</h3>
 
 <button onclick="exportPDF()" style="margin-bottom:15px;">
@@ -184,6 +183,7 @@ Export Dashboard PDF
 
 </div>
 </div>
+
 </div>
 
 <!-- MONTHLY -->
@@ -232,7 +232,7 @@ Export Dashboard PDF
 <h3>Client Entry</h3>
 
 <label>Client Name</label>
-<input id="clientName" style="width:100%;padding:8px;"><br><br>
+<input id="clientName"><br><br>
 
 <label>Status</label>
 <select id="status">
@@ -290,6 +290,7 @@ Export Dashboard PDF
 
 </div>
 </div>
+  
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
@@ -829,6 +830,7 @@ backgroundColor:"#1e6fd9"
 </script>
 </body>
 </html>
+
 
 
 
