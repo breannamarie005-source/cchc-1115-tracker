@@ -156,23 +156,39 @@ margin-bottom:20px;
 
     </div>
 
-    <canvas id="navChart"></canvas>
-<br><br>
+    <div class="dashboard-grid">
 
+<div class="card">
+<h3>Clients per Navigator</h3>
+<canvas id="navChart"></canvas>
+</div>
+
+<div class="card">
+<h3>Revenue per Navigator</h3>
 <canvas id="revenueChart"></canvas>
-<br><br>
+</div>
 
+<div class="card">
 <h3>Revenue by Service</h3>
 <canvas id="serviceChart"></canvas>
+</div>
 
+<div class="card">
 <h3>Case Status</h3>
 <canvas id="statusChart"></canvas>
+</div>
 
+<div class="card">
 <h3>Monthly Revenue</h3>
 <canvas id="monthlyChart"></canvas>
+</div>
 
+<div class="card">
 <h3>Navigator Leaderboard</h3>
 <div id="leaderboard"></div>
+</div>
+
+</div>
     
   </div>
 
@@ -822,6 +838,7 @@ XLSX.writeFile(wb,"clients.xlsx");
 </script>
 </body>
 </html>
+
 
 
 
