@@ -225,41 +225,144 @@ Export Dashboard PDF
 </div>
 
 <!-- CLIENT ENTRY -->
-**<div id="entryTab" class="tabSection">
+<div id="entryTab" class="tabSection">
+  <div class="card">
+    <h3>Client Entry</h3>
 
-<div class="card">
+<div class="entry-grid">
 
-<h3>Client Entry</h3>
-
+<div>
 <label>Client Name</label>
-<input id="clientName"><br><br>
+<input id="clientName" style="width:100%;padding:8px;">
+</div>
 
+<div>
 <label>Status</label>
-<select id="status">
+<select id="status" style="width:100%;padding:8px;">
 <option>Open</option>
 <option>Closed</option>
-</select><br><br>
+</select>
+</div>
 
+<div>
 <label>Navigator</label>
-<select id="navigator">
+<select id="navigator" style="width:100%;padding:8px;">
 <option>Breanna Shelanskey</option>
 <option>Kylie Miles</option>
 <option>Alexandra Dieffenbacher</option>
 <option>Laurie Davis</option>
 <option>Shauna Cone</option>
-</select><br><br>
+</select>
+</div>
 
+<div>
+<label>Medicaid Type</label>
+<select id="medicaid" style="width:100%;padding:8px;">
+<option>MCO</option>
+<option>Fee for Service</option>
+<option>Not in Enhanced Population</option>
+<option>No Needs</option>
+</select>
+</div>
+
+<div>
+<label>Medicaid Level</label>
+<select id="medicaidLevel" style="width:100%;padding:8px;">
+<option value="">Select Level</option>
+<option>Level 1 MCO</option>
+<option>Level 2 MCO</option>
+<option>Level 1 FFS</option>
+<option>Level 2 FFS</option>
+</select>
+</div>
+
+<div>
+<label>Eligibility Date</label>
+<input type="date" id="eligibilityDate" style="width:100%;padding:8px;">
+</div>
+
+<div>
+<label>Follow Up Date</label>
+<input type="date" id="followUpDate" style="width:100%;padding:8px;">
+</div>
+
+<div>
 <label>Eligibility Units</label>
-<input type="number" id="eligibilityUnits" oninput="calculateTotals()"><br><br>
+<input type="number" id="eligibilityUnits" oninput="calculateTotals()" style="width:100%;padding:8px;">
+<div id="eligibilityTotal">$0.00</div>
+</div>
 
+<div>
 <label>Service Units</label>
-<input type="number" id="serviceUnits" oninput="calculateTotals()"><br><br>
+<input type="number" id="serviceUnits" oninput="calculateTotals()" style="width:100%;padding:8px;">
+<div id="serviceTotal">$0.00</div>
+</div>
+
+<div class="entry-full">
+<div class="total-box">
+Navigation Total: <span id="navigationTotal">$0.00</span>
+</div>
+</div>
+
+<div class="entry-full">
+<h4>Support Services</h4>
+
+<div class="service-row">
+<div><input type="checkbox" class="svcCheck" value="Rent"> Rent</div>
+<input type="number" class="svcAmount" oninput="calculateTotals()">
+</div>
+
+<div class="service-row">
+<div><input type="checkbox" class="svcCheck" value="Utilities"> Utilities</div>
+<input type="number" class="svcAmount" oninput="calculateTotals()">
+</div>
+
+<div class="service-row">
+<div><input type="checkbox" class="svcCheck" value="Microwave"> Microwave</div>
+<input type="number" class="svcAmount" oninput="calculateTotals()">
+</div>
+
+<div class="service-row">
+<div><input type="checkbox" class="svcCheck" value="Fridge"> Fridge</div>
+<input type="number" class="svcAmount" oninput="calculateTotals()">
+</div>
+
+<div class="service-row">
+<div><input type="checkbox" class="svcCheck" value="Pre-Tenancy"> Pre-Tenancy</div>
+<input type="number" class="svcAmount" oninput="calculateTotals()">
+</div>
+
+<div class="service-row">
+<div><input type="checkbox" class="svcCheck" value="Nutrition"> Nutrition</div>
+<input type="number" class="svcAmount" oninput="calculateTotals()">
+</div>
+
+<div class="service-row">
+<div><input type="checkbox" class="svcCheck" value="Epicured"> Epicured</div>
+<input type="number" class="svcAmount" oninput="calculateTotals()">
+</div>
+
+<div class="service-row">
+<div><input type="checkbox" class="svcCheck" value="Follow Up"> Follow Up</div>
+<input type="number" class="svcAmount" oninput="calculateTotals()">
+</div>
+
+<div class="total-box">
+Support Total: <span id="supportTotal">$0.00</span>
+</div>
+
+<div class="grand-box">
+Grand Total: <span id="grandTotal">$0.00</span>
+</div>
+
+</div>
+
+</div>
 
 <button onclick="saveClient()">Save Client</button>
 
+  </div>
 </div>
-</div>
-
 <!-- CLIENT LIST -->
 <div id="listTab" class="tabSection">
 
@@ -830,6 +933,7 @@ backgroundColor:"#1e6fd9"
 </script>
 </body>
 </html>
+
 
 
 
