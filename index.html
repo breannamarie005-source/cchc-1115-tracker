@@ -921,6 +921,10 @@ function populateFilters(){
 
 const clientSet=new Set();
 const navSet=new Set();
+const eligibilitySet=new Set();
+const followSet=new Set();
+const unitsSet=new Set();
+const servicesSet=new Set();
 
 document.querySelectorAll("#clientTableBody tr").forEach(row=>{
 clientSet.add(row.children[0].innerText);
@@ -1043,6 +1047,7 @@ backgroundColor:"#1e6fd9"
 </script>
 </body>
 </html>
+
 
 
 
