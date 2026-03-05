@@ -552,10 +552,10 @@ document.getElementById("appSection").classList.add("hidden");
 window.showTab=function(tab){
 
 document.querySelectorAll(".tabSection").forEach(t=>{
-t.classList.remove("active");
+t.style.display="none";
 });
 
-document.getElementById(tab).classList.add("active");
+document.getElementById(tab).style.display="block";
 
 };
 
@@ -1025,6 +1025,7 @@ backgroundColor:"#1e6fd9"
 </script>
 </body>
 </html>
+
 
 
 
