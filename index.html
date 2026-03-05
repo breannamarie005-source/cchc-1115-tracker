@@ -809,7 +809,13 @@ tableBody.innerHTML+=`
 <td>${data.medicaid||""}</td>
 <td>${data.medicaidLevel||""}</td>
 <td>${data.eligibilityDate||""}</td>
-<td>${data.followUpDate||""}</td>
+<td class="${
+new Date(data.followUpDate) >= new Date()
+? 'followup-good'
+: 'followup-bad'
+}">
+${data.followUpDate || ""}
+</td>
 <td>${units}</td>
 <td>${(data.services||[]).map(s=>s.name+" ($"+s.amount+")").join(", ")}</td>
 <td>
@@ -1235,6 +1241,7 @@ backgroundColor:"#00b894"
 </script>
 </body>
 </html>
+
 
 
 
