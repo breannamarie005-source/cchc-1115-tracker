@@ -279,7 +279,25 @@ Export Dashboard PDF
 <br>
 
 <div style="max-width:600px;margin:auto;">
+<div style="
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:30px;
+max-width:1000px;
+margin:auto;
+">
+
+<div>
+<h4 style="text-align:center;">Clients per Navigator</h4>
 <canvas id="monthlyNavigatorChart"></canvas>
+</div>
+
+<div>
+<h4 style="text-align:center;">Revenue per Navigator</h4>
+<canvas id="monthlyRevenueNavigatorChart"></canvas>
+</div>
+
+</div>
 </div>
 
 </div>
@@ -1122,6 +1140,7 @@ backgroundColor:"#1e6fd9"
 </script>
 </body>
 </html>
+
 
 
 
