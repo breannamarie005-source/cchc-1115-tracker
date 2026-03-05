@@ -916,6 +916,45 @@ datasets:[{data:Object.values(statusCounts)}]
 }
 });
 
+  /* MEDICAID TYPE */
+
+const medicaidCtx =
+document.getElementById("medicaidChart");
+
+if(window.medicaidChartInstance){
+window.medicaidChartInstance.destroy();
+}
+
+window.medicaidChartInstance=new Chart(medicaidCtx,{
+type:"pie",
+data:{
+labels:Object.keys(medicaidCounts),
+datasets:[{
+data:Object.values(medicaidCounts)
+}]
+}
+});
+
+
+/* MEDICAID LEVEL */
+
+const medicaidLevelCtx =
+document.getElementById("medicaidLevelChart");
+
+if(window.medicaidLevelChartInstance){
+window.medicaidLevelChartInstance.destroy();
+}
+
+window.medicaidLevelChartInstance=new Chart(medicaidLevelCtx,{
+type:"pie",
+data:{
+labels:Object.keys(medicaidLevelCounts),
+datasets:[{
+data:Object.values(medicaidLevelCounts)
+}]
+}
+});
+
 
 /* MONTHLY REVENUE */
 
@@ -1178,6 +1217,7 @@ backgroundColor:"#00b894"
 </script>
 </body>
 </html>
+
 
 
 
