@@ -612,6 +612,17 @@ serviceRevenue[s.name] += amount;
 });
 
 totalRevenue+=revenue;
+if(data.eligibilityDate){
+
+const month = data.eligibilityDate.substring(0,7);
+
+if(!monthlyRevenue[month]){
+monthlyRevenue[month] = 0;
+}
+
+monthlyRevenue[month] += revenue;
+
+}
 
 navCounts[data.navigator]=(navCounts[data.navigator]||0)+1;
 statusCounts[data.status] = (statusCounts[data.status] || 0) + 1;
@@ -745,6 +756,7 @@ XLSX.writeFile(wb,"clients.xlsx");
 </script>
 </body>
 </html>
+
 
 
 
