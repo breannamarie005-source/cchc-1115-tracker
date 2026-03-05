@@ -109,13 +109,14 @@ overflow-y:auto;
 }
 </style>
 </head>
-**<body>
+<body>
 
 <header>CCHC 1115 Waiver Performance Tracker</header>
 
 <div class="container">
 
-<div id="loginSection" class="card" style="max-width:400px;">
+<!-- LOGIN -->
+<div id="loginSection" class="card" style="max-width:400px;margin:auto;margin-top:120px;">
   <h3>Login</h3>
   <input id="email" placeholder="Email"><br><br>
   <input id="password" type="password" placeholder="Password"><br><br>
@@ -123,6 +124,7 @@ overflow-y:auto;
   <p id="loginError" style="color:red;"></p>
 </div>
 
+<!-- APP -->
 <div id="appSection" class="hidden">
 
 <div style="margin-bottom:20px;">
@@ -132,64 +134,24 @@ overflow-y:auto;
   <button onclick="showTab('listTab')">Client List</button>
 </div>
 
-
 <div class="card">
-  <button onclick="logout()">Logout</button>
-  <h3 id="roleDisplay"></h3>
+<button onclick="logout()">Logout</button>
+<h3 id="roleDisplay"></h3>
 </div>
 
+<!-- DASHBOARD -->
 <div id="dashboardTab" class="tabSection">
 
-  <div class="card">
-    <h3>Dashboard</h3>
+<div class="card">
 
-    <button onclick="exportPDF()" style="margin-bottom:15px;">
-   Export Dashboard PDF
+<h3>Dashboard</h3>
+
+<button onclick="exportPDF()" style="margin-bottom:15px;">
+Export Dashboard PDF
 </button>
-  
-  <div style="
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:20px;
-margin-bottom:20px;
-">
-
-<div class="card" style="text-align:center;">
-<h4>Total Clients</h4>
-<div id="totalClients" style="font-size:26px;font-weight:bold;">0</div>
-</div>
-
-<div class="card" style="text-align:center;">
-<h4>Total Units</h4>
-<div id="totalUnits" style="font-size:26px;font-weight:bold;">0</div>
-</div>
-
-<div class="card" style="text-align:center;">
-<h4>Total Revenue</h4>
-<div id="totalRevenue" style="font-size:26px;font-weight:bold;">$0</div>
-</div>
-
-<div class="card" style="text-align:center;">
-<h4>Avg Revenue / Client</h4>
-<div id="avgRevenue" style="font-size:26px;font-weight:bold;">$0</div>
-</div>
-
-<div class="card" style="text-align:center;">
-<h4>Units This Month</h4>
-<div id="monthUnits" style="font-size:26px;font-weight:bold;">0</div>
-</div>
-
-<div class="card" style="text-align:center;">
-<h4>🏆 Top Navigator</h4>
-<div id="topNavigator" style="font-size:20px;font-weight:bold;">-</div>
-</div>
-
-</div>
-
-<br>
 
 <div class="dashboard-grid">
-  
+
 <div class="card">
 <h3>Clients per Navigator</h3>
 <canvas id="navChart"></canvas>
@@ -220,42 +182,37 @@ margin-bottom:20px;
 <div id="leaderboard"></div>
 </div>
 
-</div> <!-- dashboard-grid -->
+</div>
+</div>
+</div>
 
-</div> <!-- dashboard card -->
-
-</div> <!-- dashboardTab -->
-
+<!-- MONTHLY -->
 <div id="monthlyTab" class="tabSection">
 
 <div class="card">
 
 <h3>Monthly Performance</h3>
 
-<div style="margin-bottom:20px;">
 <label>Select Month</label>
 <input type="month" id="monthSelector" onchange="loadMonthlyData()">
-</div>
 
-<div style="
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:20px;
-">
+<br><br>
+
+<div class="dashboard-grid">
 
 <div class="card">
 <h4>Clients</h4>
-<div id="monthClients" style="font-size:26px;font-weight:bold;">0</div>
+<div id="monthClients">0</div>
 </div>
 
 <div class="card">
 <h4>Units</h4>
-<div id="monthUnitsTotal" style="font-size:26px;font-weight:bold;">0</div>
+<div id="monthUnitsTotal">0</div>
 </div>
 
 <div class="card">
 <h4>Revenue</h4>
-<div id="monthRevenue" style="font-size:26px;font-weight:bold;">$0</div>
+<div id="monthRevenue">$0</div>
 </div>
 
 </div>
@@ -265,227 +222,74 @@ gap:20px;
 <canvas id="monthlyNavigatorChart"></canvas>
 
 </div>
-
 </div>
+
+<!-- CLIENT ENTRY -->
 <div id="entryTab" class="tabSection">
-  <div class="card">
-    <h3>Client Entry</h3>
 
-  <div class="entry-grid">
+<div class="card">
 
-  <!-- LEFT COLUMN -->
-  <div>
-    <label>Client Name</label>
-    <input id="clientName" style="width:100%;padding:8px;">
-  </div>
+<h3>Client Entry</h3>
 
-  <div>
-    <label>Status</label>
-    <select id="status" style="width:100%;padding:8px;">
-      <option>Open</option>
-      <option>Closed</option>
-    </select>
-  </div>
+<label>Client Name</label>
+<input id="clientName" style="width:100%;padding:8px;"><br><br>
 
-  <div>
-    <label>Navigator</label>
-    <select id="navigator" style="width:100%;padding:8px;">
-      <option>Breanna Shelanskey</option>
-      <option>Kylie Miles</option>
-      <option>Alexandra Dieffenbacher</option>
-      <option>Laurie Davis</option>
-      <option>Shauna Cone</option>
-    </select>
-  </div>
-<div>
-  <label>Medicaid Type</label>
-  <select id="medicaid" style="width:100%;padding:8px;">
-    <option>MCO</option>
-    <option>Fee for Service</option>
-    <option>Not in Enhanced Population</option>
-    <option>No Needs</option>
-  </select>
-</div>
+<label>Status</label>
+<select id="status">
+<option>Open</option>
+<option>Closed</option>
+</select><br><br>
 
-<div>
-  <label>Medicaid Level</label>
-  <select id="medicaidLevel" style="width:100%;padding:8px;">
-    <option value="">Select Level</option>
-    <option>Level 1 MCO</option>
-    <option>Level 2 MCO</option>
-    <option>Level 1 FFS</option>
-    <option>Level 2 FFS</option>
-  </select>
-</div>
+<label>Navigator</label>
+<select id="navigator">
+<option>Breanna Shelanskey</option>
+<option>Kylie Miles</option>
+<option>Alexandra Dieffenbacher</option>
+<option>Laurie Davis</option>
+<option>Shauna Cone</option>
+</select><br><br>
 
-<div>
-  <label>Eligibility Date</label>
-  <input type="date" id="eligibilityDate" style="width:100%;padding:8px;">
-</div>
+<label>Eligibility Units</label>
+<input type="number" id="eligibilityUnits" oninput="calculateTotals()"><br><br>
 
-<div>
-  <label>Follow Up Date</label>
-  <input type="date" id="followUpDate" style="width:100%;padding:8px;">
-</div>
-  <div>
-    <label>Eligibility Units</label>
-    <input type="number" id="eligibilityUnits" oninput="calculateTotals()" style="width:100%;padding:8px;">
-    <div id="eligibilityTotal">$0.00</div>
-  </div>
+<label>Service Units</label>
+<input type="number" id="serviceUnits" oninput="calculateTotals()"><br><br>
 
-  <div>
-    <label>Service Units</label>
-    <input type="number" id="serviceUnits" oninput="calculateTotals()" style="width:100%;padding:8px;">
-    <div id="serviceTotal">$0.00</div>
-  </div>
-
-  <!-- FULL WIDTH TOTAL -->
-  <div class="entry-full">
-    <div class="total-box">
-      Navigation Total: <span id="navigationTotal">$0.00</span>
-    </div>
-  </div>
-
-  <!-- SUPPORT SERVICES FULL WIDTH -->
-  <div class="entry-full">
-    <h4>Support Services</h4>
-
-    <div class="service-row">
-      <div><input type="checkbox" class="svcCheck" value="Rent"> Rent</div>
-      <input type="number" class="svcAmount" oninput="calculateTotals()">
-    </div>
-
-    <div class="service-row">
-      <div><input type="checkbox" class="svcCheck" value="Utilities"> Utilities</div>
-      <input type="number" class="svcAmount" oninput="calculateTotals()">
-    </div>
-
-    <div class="service-row">
-      <div><input type="checkbox" class="svcCheck" value="Microwave"> Microwave</div>
-      <input type="number" class="svcAmount" oninput="calculateTotals()">
-    </div>
-
-    <div class="service-row">
-      <div><input type="checkbox" class="svcCheck" value="Fridge"> Fridge</div>
-      <input type="number" class="svcAmount" oninput="calculateTotals()">
-    </div>
-
-    <div class="service-row">
-      <div><input type="checkbox" class="svcCheck" value="Pre-Tenancy"> Pre-Tenancy</div>
-      <input type="number" class="svcAmount" oninput="calculateTotals()">
-    </div>
-
-    <div class="service-row">
-      <div><input type="checkbox" class="svcCheck" value="Nutrition"> Nutrition</div>
-      <input type="number" class="svcAmount" oninput="calculateTotals()">
-    </div>
-    
-    <div class="service-row">
-  <div><input type="checkbox" class="svcCheck" value="Epicured"> Epicured</div>
-  <input type="number" class="svcAmount" oninput="calculateTotals()">
-</div>
-    <div class="service-row">
-      <div><input type="checkbox" class="svcCheck" value="Follow Up"> Follow Up</div>
-      <input type="number" class="svcAmount" oninput="calculateTotals()">
-    </div>
-
-    <div class="total-box">
-      Support Total: <span id="supportTotal">$0.00</span>
-    </div>
-
-    <div class="grand-box">
-      Grand Total: <span id="grandTotal">$0.00</span>
-    </div>
-  </div>
+<button onclick="saveClient()">Save Client</button>
 
 </div>
-
-    <button onclick="saveClient()">Save Client</button>
-
-  </div>
 </div>
 
+<!-- CLIENT LIST -->
 <div id="listTab" class="tabSection">
-  <div class="card">
-    <h3>Client List</h3>
-    <button onclick="exportExcel()">
-Export Client List
-</button>
-    <table id="clientTable" style="width:100%;border-collapse:collapse;">
-      <thead>
 
+<div class="card">
+
+<h3>Client List</h3>
+
+<button onclick="exportExcel()">Export Client List</button>
+
+<table id="clientTable" style="width:100%;border-collapse:collapse;">
+
+<thead>
 <tr>
 <th>Client</th>
 <th>Navigator</th>
 <th>Status</th>
-<th>Medicaid</th>
-<th>Level</th>
-<th>Eligibility</th>
-<th>Follow Up</th>
 <th>Units</th>
-<th>Services</th>
 <th>Actions</th>
 </tr>
-
-<tr>
-<th>
-<select onchange="filterTable()" id="filterClient">
-<option value="">All</option>
-</select>
-</th>
-
-<th>
-<select onchange="filterTable()" id="filterNavigator">
-<option value="">All</option>
-</select>
-</th>
-
-<th>
-<select onchange="filterTable()" id="filterStatus">
-<option value="">All</option>
-<option>Open</option>
-<option>Closed</option>
-</select>
-</th>
-
-<th>
-<select onchange="filterTable()" id="filterMedicaid">
-<option value="">All</option>
-<option>MCO</option>
-<option>Fee for Service</option>
-<option>Not in Enhanced Population</option>
-<option>No Needs</option>
-</select>
-</th>
-
-<th>
-<select onchange="filterTable()" id="filterLevel">
-<option value="">All</option>
-<option>Level 1 MCO</option>
-<option>Level 2 MCO</option>
-<option>Level 1 FFS</option>
-<option>Level 2 FFS</option>
-</select>
-</th>
-
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-
-</tr>
-
 </thead>
-      <tbody id="clientTableBody"></tbody>
-    </table>
+
+<tbody id="clientTableBody"></tbody>
+
+</table>
+
 </div>
 </div>
 
 </div>
-  
- </div>
-  
+</div>
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
@@ -1025,6 +829,7 @@ backgroundColor:"#1e6fd9"
 </script>
 </body>
 </html>
+
 
 
 
