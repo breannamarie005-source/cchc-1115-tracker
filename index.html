@@ -1192,6 +1192,42 @@ pdf.addImage(img,"PNG",0,10,imgWidth,imgHeight);
 pdf.save("CCHC-1115-Dashboard.pdf");
 
 };
+
+  window.exportExcel=function(){
+
+const table=document.getElementById("clientTable");
+const wb=XLSX.utils.table_to_book(table,{sheet:"Clients"});
+XLSX.writeFile(wb,"clients.xlsx");
+
+};
+
+
+/* CLIENT LIST MONTH FILTER */
+
+window.filterClientMonth = function(){
+
+const selectedMonth =
+document.getElementById("clientListMonth").value;
+
+document.querySelectorAll("#clientTableBody tr").forEach(row=>{
+
+const eligibilityDate =
+row.children[5].innerText;
+
+if(!selectedMonth){
+row.style.display="";
+return;
+}
+
+const rowMonth =
+eligibilityDate.substring(0,7);
+
+row.style.display =
+rowMonth === selectedMonth ? "" : "none";
+
+});
+
+};
   
 window.exportExcel=function(){
 
@@ -1301,6 +1337,7 @@ backgroundColor:"#00b894"
 </script>
 </body>
 </html>
+
 
 
 
