@@ -493,6 +493,19 @@ Grand Total: <span id="grandTotal">$0.00</span>
 
 <h3>Client List</h3>
 
+<div style="margin-bottom:15px;">
+
+<label>Filter by Month:</label>
+
+<input
+type="month"
+id="clientListMonth"
+onchange="filterClientMonth()"
+style="padding:6px;margin-left:10px;"
+>
+
+</div>
+  
 <button onclick="exportExcel()">Export Client List</button>
 
 <table id="clientTable" style="width:100%;border-collapse:collapse;">
@@ -1275,6 +1288,7 @@ backgroundColor:"#00b894"
 </script>
 </body>
 </html>
+
 
 
 
