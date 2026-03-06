@@ -629,6 +629,7 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 let clientsData = [];
+let unsubscribeClients = null;
 
 window.login = async function(){
 
@@ -1331,6 +1332,7 @@ backgroundColor:"#00b894"
 </script>
 </body>
 </html>
+
 
 
 
