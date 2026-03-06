@@ -807,6 +807,16 @@ const selectedMonth =
 document.getElementById("dashboardMonth")?.value;
   
 const data=docSnap.data();
+if(selectedMonth){
+
+const rowMonth =
+(data.eligibilityDate || "").substring(0,7);
+
+if(rowMonth !== selectedMonth){
+return;
+}
+
+}
 clientsData.push(data);
 
 totalClients++;
@@ -1291,6 +1301,7 @@ backgroundColor:"#00b894"
 </script>
 </body>
 </html>
+
 
 
 
