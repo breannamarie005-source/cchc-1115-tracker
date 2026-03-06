@@ -1189,7 +1189,10 @@ canvas.height * imgWidth / canvas.width;
 
 pdf.addImage(img,"PNG",0,10,imgWidth,imgHeight);
 
-pdf.save("CCHC-1115-Dashboard.pdf");
+const month =
+document.getElementById("dashboardMonth").value || "all";
+
+pdf.save(`CCHC-1115-Dashboard-${month}.pdf`);
 
 };
 
@@ -1337,6 +1340,7 @@ backgroundColor:"#00b894"
 </script>
 </body>
 </html>
+
 
 
 
