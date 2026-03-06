@@ -909,14 +909,12 @@ topNav[0] + " ($" + topNav[1].toFixed(0) + ")";
 
 /* UNITS THIS MONTH */
 
-let currentMonth = new Date().toISOString().substring(0,7);
-
 let monthUnits = 0;
 
 snapshot.forEach(doc=>{
 const d = doc.data();
 
-if((d.eligibilityDate || "").substring(0,7) === currentMonth){
+if((d.eligibilityDate || "").substring(0,7) === selectedMonth){
 monthUnits += (d.eligibilityUnits || 0) + (d.serviceUnits || 0);
 }
 
@@ -1333,6 +1331,7 @@ backgroundColor:"#00b894"
 </script>
 </body>
 </html>
+
 
 
 
