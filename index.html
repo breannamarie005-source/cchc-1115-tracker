@@ -803,12 +803,13 @@ let totalUnits=0;
 let totalRevenue=0;
 
 snapshot.forEach(docSnap=>{
-  
-const data=docSnap.data();
+
+const data = docSnap.data();
 
 const clientMonth =
 (data.eligibilityDate || "").substring(0,7);
 
+/* MONTH FILTER */
 if(selectedMonth && clientMonth !== selectedMonth){
 return;
 }
@@ -1324,6 +1325,7 @@ backgroundColor:"#00b894"
 </script>
 </body>
 </html>
+
 
 
 
