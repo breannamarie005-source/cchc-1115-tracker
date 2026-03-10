@@ -805,7 +805,6 @@ let totalRevenue=0;
 snapshot.forEach(docSnap=>{
 
 const data = docSnap.data();
-clientsData.push(data);
 
 const clientMonth =
 (data.eligibilityDate || "").substring(0,7);
@@ -813,6 +812,8 @@ const clientMonth =
 if(selectedMonth && clientMonth !== selectedMonth){
 return;
 }
+
+clientsData.push(data);
 
 totalClients++;
 
@@ -827,6 +828,7 @@ let revenue = units * 17.5;
 (data.services||[]).forEach(s=>{
 const amount = Number(s.amount||0);
 revenue += amount;
+
 serviceRevenue[s.name] =
 (serviceRevenue[s.name]||0)+amount;
 });
@@ -853,6 +855,8 @@ medicaidCounts[data.medicaid] =
 
 medicaidLevelCounts[data.medicaidLevel] =
 (medicaidLevelCounts[data.medicaidLevel]||0)+1;
+
+/* TABLE */
 
 tableBody.innerHTML+=`
 <tr>
@@ -894,12 +898,10 @@ Object.entries(navRevenue).sort((a,b)=>b[1]-a[1])[0];
 document.getElementById("topNavigator").innerText =
 topNav ? `${topNav[0]} ($${topNav[1].toFixed(0)})` : "-";
 
-/* CLIENTS PER NAVIGATOR */
+/* CHARTS */
 
 const ctx=document.getElementById("navChart");
-
 if(window.navChartInstance) window.navChartInstance.destroy();
-
 window.navChartInstance=new Chart(ctx,{
 type:"bar",
 data:{
@@ -908,12 +910,8 @@ datasets:[{label:"Clients per Navigator",data:Object.values(navCounts)}]
 }
 });
 
-/* REVENUE PER NAVIGATOR */
-
 const rctx=document.getElementById("revenueChart");
-
 if(window.revenueChartInstance) window.revenueChartInstance.destroy();
-
 window.revenueChartInstance=new Chart(rctx,{
 type:"bar",
 data:{
@@ -922,12 +920,8 @@ datasets:[{label:"Revenue per Navigator",data:Object.values(navRevenue)}]
 }
 });
 
-/* SERVICE REVENUE */
-
 const serviceCtx=document.getElementById("serviceChart");
-
 if(window.serviceChartInstance) window.serviceChartInstance.destroy();
-
 window.serviceChartInstance=new Chart(serviceCtx,{
 type:"pie",
 data:{
@@ -936,12 +930,8 @@ datasets:[{data:Object.values(serviceRevenue)}]
 }
 });
 
-/* CASE STATUS */
-
 const statusCtx=document.getElementById("statusChart");
-
 if(window.statusChartInstance) window.statusChartInstance.destroy();
-
 window.statusChartInstance=new Chart(statusCtx,{
 type:"doughnut",
 data:{
@@ -950,50 +940,28 @@ datasets:[{data:Object.values(statusCounts)}]
 }
 });
 
-/* MEDICAID TYPE */
-
-const medicaidCtx =
-document.getElementById("medicaidChart");
-
-if(window.medicaidChartInstance){
-window.medicaidChartInstance.destroy();
-}
-
+const medicaidCtx=document.getElementById("medicaidChart");
+if(window.medicaidChartInstance) window.medicaidChartInstance.destroy();
 window.medicaidChartInstance=new Chart(medicaidCtx,{
 type:"pie",
 data:{
 labels:Object.keys(medicaidCounts),
-datasets:[{
-data:Object.values(medicaidCounts)
-}]
+datasets:[{data:Object.values(medicaidCounts)}]
 }
 });
 
-/* MEDICAID LEVEL */
-
-const medicaidLevelCtx =
-document.getElementById("medicaidLevelChart");
-
-if(window.medicaidLevelChartInstance){
-window.medicaidLevelChartInstance.destroy();
-}
-
+const medicaidLevelCtx=document.getElementById("medicaidLevelChart");
+if(window.medicaidLevelChartInstance) window.medicaidLevelChartInstance.destroy();
 window.medicaidLevelChartInstance=new Chart(medicaidLevelCtx,{
 type:"pie",
 data:{
 labels:Object.keys(medicaidLevelCounts),
-datasets:[{
-data:Object.values(medicaidLevelCounts)
-}]
+datasets:[{data:Object.values(medicaidLevelCounts)}]
 }
 });
 
-/* MONTHLY REVENUE */
-
 const monthlyCtx=document.getElementById("monthlyChart");
-
 if(window.monthlyChartInstance) window.monthlyChartInstance.destroy();
-
 window.monthlyChartInstance=new Chart(monthlyCtx,{
 type:"line",
 data:{
@@ -1005,7 +973,7 @@ data:Object.values(monthlyRevenue)
 }
 });
 
-/* NAVIGATOR LEADERBOARD */
+/* LEADERBOARD */
 
 const leaderboard =
 Object.entries(navRevenue).sort((a,b)=>b[1]-a[1]);
@@ -1013,7 +981,7 @@ Object.entries(navRevenue).sort((a,b)=>b[1]-a[1]);
 let html="";
 
 leaderboard.forEach((nav,i)=>{
-html += `
+html+=`
 <div style="padding:8px;border-bottom:1px solid rgba(255,255,255,0.1)">
 ${i+1}. ${nav[0]} — $${nav[1].toFixed(2)}
 </div>
@@ -1025,83 +993,6 @@ document.getElementById("leaderboard").innerHTML = html;
 });
 
 }
-
-
-const selectedMonth =
-document.getElementById("dashboardMonth")?.value;
-
-let navCounts={};
-let navRevenue={};
-let serviceRevenue={};
-let statusCounts={};
-let monthlyRevenue={};  
-let medicaidCounts={};
-let medicaidLevelCounts={};;
-
-let totalClients=0;
-let totalUnits=0;
-let totalRevenue=0;
-
-clientsData.forEach(data=>{
-
-const clientMonth =
-(data.eligibilityDate || "").substring(0,7);
-
-if(selectedMonth && clientMonth !== selectedMonth){
-return;
-}
-
-totalClients++;
-
-const units =
-(data.eligibilityUnits||0) +
-(data.serviceUnits||0);
-
-totalUnits+=units;
-
-let revenue=units*17.5;
-
-(data.services||[]).forEach(s=>{
-
-const amount = Number(s.amount||0);
-revenue += amount;
-
-serviceRevenue[s.name] =
-(serviceRevenue[s.name]||0) + amount;
-
-});
-
-totalRevenue+=revenue;
-
-navCounts[data.navigator] =
-(navCounts[data.navigator]||0)+1;
-
-navRevenue[data.navigator] =
-(navRevenue[data.navigator]||0)+revenue;
-
-statusCounts[data.status] =
-(statusCounts[data.status]||0)+1;
-
-medicaidCounts[data.medicaid] =
-(medicaidCounts[data.medicaid]||0)+1;
-
-medicaidLevelCounts[data.medicaidLevel] =
-(medicaidLevelCounts[data.medicaidLevel]||0)+1;
-
-});
-
-/* TOP NAVIGATOR */
-
-const topNav =
-Object.entries(navRevenue).sort((a,b)=>b[1]-a[1])[0];
-
-document.getElementById("topNavigator").innerText =
-topNav ? `${topNav[0]} ($${topNav[1].toFixed(0)})` : "-";
-
-  }
-  
-window.filterTable=function(){
-
 const client=document.getElementById("filterClient").value;
 const nav=document.getElementById("filterNavigator").value;
 const status=document.getElementById("filterStatus").value;
@@ -1376,6 +1267,7 @@ backgroundColor:"#00b894"
 </script>
 </body>
 </html>
+
 
 
 
