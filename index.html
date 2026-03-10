@@ -1208,11 +1208,21 @@ let navRevenue = {};
 
 onSnapshot(collection(db,"clients"), (snapshot)=>{
 
+let clients = 0;
+let units = 0;
+let revenue = 0;
+
+let navCounts = {};
+let navRevenue = {};
+
 snapshot.forEach(doc=>{
 
 const data = doc.data();
 
-if((data.eligibilityDate || "").substring(0,7) === selectedMonth){
+const clientMonth =
+(data.eligibilityDate || "").substring(0,7);
+
+if(clientMonth === selectedMonth){
 
 clients++;
 
@@ -1222,32 +1232,31 @@ const clientUnits =
 
 units += clientUnits;
 
-revenue += clientUnits * 17.5;
+let clientRevenue = clientUnits * 17.5;
 
 (data.services || []).forEach(s=>{
-revenue += Number(s.amount || 0);
+clientRevenue += Number(s.amount || 0);
 });
+
+revenue += clientRevenue;
 
 navCounts[data.navigator] =
 (navCounts[data.navigator] || 0) + 1;
+
 navRevenue[data.navigator] =
-(navRevenue[data.navigator] || 0) + revenue;  
+(navRevenue[data.navigator] || 0) + clientRevenue;
 
 }
 
 });
 
 document.getElementById("monthClients").innerText = clients;
-
 document.getElementById("monthUnitsTotal").innerText = units;
+document.getElementById("monthRevenue").innerText = "$" + revenue.toFixed(2);
 
-document.getElementById("monthRevenue").innerText =
-"$" + revenue.toFixed(2);
+/* NAVIGATOR CLIENT CHART */
 
-/* NAVIGATOR CHART */
-
-const ctx =
-document.getElementById("monthlyNavigatorChart");
+const ctx = document.getElementById("monthlyNavigatorChart");
 
 if(window.monthNavChart){
 window.monthNavChart.destroy();
@@ -1259,14 +1268,14 @@ data:{
 labels:Object.keys(navCounts),
 datasets:[{
 label:"Clients per Navigator",
-data:Object.values(navCounts),
-backgroundColor:"#1e6fd9"
+data:Object.values(navCounts)
 }]
 }
 });
 
-const revCtx =
-document.getElementById("monthlyRevenueNavigatorChart");
+/* NAVIGATOR REVENUE CHART */
+
+const revCtx = document.getElementById("monthlyRevenueNavigatorChart");
 
 if(window.monthRevChart){
 window.monthRevChart.destroy();
@@ -1278,19 +1287,17 @@ data:{
 labels:Object.keys(navRevenue),
 datasets:[{
 label:"Revenue per Navigator",
-data:Object.values(navRevenue),
-backgroundColor:"#00b894"
+data:Object.values(navRevenue)
 }]
 }
 });
-  
-});
 
-};
+});
   
 </script>
 </body>
 </html>
+
 
 
 
