@@ -809,6 +809,8 @@ const data = docSnap.data();
 const clientMonth =
 (data.eligibilityDate || "").substring(0,7);
 
+const monthMatch = !selectedMonth || clientMonth === selectedMonth;
+  
 clientsData.push(data);
 
 if(!selectedMonth || clientMonth === selectedMonth){
@@ -1276,6 +1278,7 @@ backgroundColor:"#00b894"
 </script>
 </body>
 </html>
+
 
 
 
