@@ -874,6 +874,14 @@ let monthUnits = totalUnits;
 
 document.getElementById("monthUnits").innerText = monthUnits;
 
+document.getElementById("totalClients").innerText = totalClients;
+document.getElementById("totalUnits").innerText = totalUnits;
+document.getElementById("totalRevenue").innerText =
+"$"+totalRevenue.toFixed(2);
+
+document.getElementById("avgRevenue").innerText =
+"$"+(totalClients ? (totalRevenue/totalClients).toFixed(2) : 0);
+
 const ctx=document.getElementById("navChart");
 
 if(window.navChartInstance) window.navChartInstance.destroy();
@@ -1069,16 +1077,6 @@ medicaidLevelCounts[data.medicaidLevel] =
 (medicaidLevelCounts[data.medicaidLevel]||0)+1;
 
 });
-
-/* DASHBOARD NUMBERS */
-
-document.getElementById("totalClients").innerText = totalClients;
-document.getElementById("totalUnits").innerText = totalUnits;
-document.getElementById("totalRevenue").innerText =
-"$"+totalRevenue.toFixed(2);
-
-document.getElementById("avgRevenue").innerText =
-"$"+(totalClients ? (totalRevenue/totalClients).toFixed(2) : 0);
 
 /* TOP NAVIGATOR */
 
@@ -1366,6 +1364,7 @@ backgroundColor:"#00b894"
 </script>
 </body>
 </html>
+
 
 
 
