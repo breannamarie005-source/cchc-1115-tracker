@@ -839,12 +839,16 @@ monthlyRevenue[month] =
 (monthlyRevenue[month]||0)+revenue;
 }
 
+if(!selectedMonth || clientMonth === selectedMonth){
+
 navCounts[data.navigator] =
 (navCounts[data.navigator]||0)+1;
 
 navRevenue[data.navigator] =
 (navRevenue[data.navigator]||0)+revenue;
 
+}
+  
 statusCounts[data.status] =
 (statusCounts[data.status]||0)+1;
 
@@ -1268,6 +1272,7 @@ backgroundColor:"#00b894"
 </script>
 </body>
 </html>
+
 
 
 
