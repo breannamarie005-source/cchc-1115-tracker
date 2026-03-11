@@ -788,11 +788,26 @@ serviceRevenue[s.name] =
 
 totalRevenue += revenue;
 
-const month =
-(data.eligibilityDate || "").substring(0,7);
+/* MONTHLY REVENUE SHOULD USE ALL DATA */
 
-monthlyRevenue[month] =
-(monthlyRevenue[month]||0)+revenue;
+clientsData.forEach(d=>{
+
+const m = (d.eligibilityDate || "").substring(0,7);
+
+const units =
+(d.eligibilityUnits||0) +
+(d.serviceUnits||0);
+
+let revenue = units * 17.5;
+
+(d.services||[]).forEach(s=>{
+revenue += Number(s.amount||0);
+});
+
+monthlyRevenue[m] =
+(monthlyRevenue[m]||0)+revenue;
+
+});
 
 navRevenue[data.navigator] =
 (navRevenue[data.navigator]||0)+revenue;
@@ -1196,6 +1211,7 @@ XLSX.writeFile(wb,"clients.xlsx");
 </script>
 </body>
 </html>
+
 
 
 
