@@ -851,6 +851,45 @@ Object.entries(navRevenue).sort((a,b)=>b[1]-a[1])[0];
 document.getElementById("topNavigator").innerText =
 topNav ? `${topNav[0]} ($${topNav[1].toFixed(0)})` : "-";
 
+/* NAV CHART */
+
+const navCounts = {};
+filtered.forEach(c=>{
+navCounts[c.navigator] = (navCounts[c.navigator]||0)+1;
+});
+
+const ctx = document.getElementById("navChart");
+
+if(window.navChartInstance) window.navChartInstance.destroy();
+
+window.navChartInstance = new Chart(ctx,{
+type:"bar",
+data:{
+labels:Object.keys(navCounts),
+datasets:[{
+label:"Clients per Navigator",
+data:Object.values(navCounts)
+}]
+}
+});
+
+/* REVENUE CHART */
+
+const rctx = document.getElementById("revenueChart");
+
+if(window.revenueChartInstance) window.revenueChartInstance.destroy();
+
+window.revenueChartInstance = new Chart(rctx,{
+type:"bar",
+data:{
+labels:Object.keys(navRevenue),
+datasets:[{
+label:"Revenue per Navigator",
+data:Object.values(navRevenue)
+}]
+}
+});
+
 }
 window.filterTable=function(){
 
@@ -1136,6 +1175,7 @@ data:Object.values(navRevenue)
 </script>
 </body>
 </html>
+
 
 
 
