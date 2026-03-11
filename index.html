@@ -842,6 +842,12 @@ serviceRevenue[s.name] =
 
 totalRevenue += revenue;
 
+const month =
+(data.eligibilityDate || "").substring(0,7);
+
+monthlyRevenue[month] =
+(monthlyRevenue[month]||0)+revenue;
+
 navRevenue[data.navigator] =
 (navRevenue[data.navigator]||0)+revenue;
   
@@ -1271,6 +1277,7 @@ data:Object.values(navRevenue)
 </script>
 </body>
 </html>
+
 
 
 
