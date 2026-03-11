@@ -972,8 +972,43 @@ ${i+1}. ${nav[0]} — $${nav[1].toFixed(2)}
 });
 
 document.getElementById("leaderboard").innerHTML = html;
-  
+
 }
+
+function buildClientTable(){
+
+const tableBody = document.getElementById("clientTableBody");
+
+tableBody.innerHTML = "";
+
+clientsData.forEach(data=>{
+
+const units =
+(data.eligibilityUnits||0) +
+(data.serviceUnits||0);
+
+tableBody.innerHTML+=`
+<tr>
+<td>${data.client||""}</td>
+<td>${data.navigator||""}</td>
+<td>${data.status||""}</td>
+<td>${data.medicaid||""}</td>
+<td>${data.medicaidLevel||""}</td>
+<td>${data.eligibilityDate||""}</td>
+<td>${data.followUpDate||""}</td>
+<td>${units}</td>
+<td>${(data.services||[]).map(s=>s.name+" ($"+s.amount+")").join(", ")}</td>
+<td></td>
+</tr>
+`;
+
+});
+
+populateFilters();
+
+}
+
+
 window.filterTable=function(){
 
 const client=document.getElementById("filterClient").value;
@@ -1156,6 +1191,7 @@ XLSX.writeFile(wb,"clients.xlsx");
 </script>
 </body>
 </html>
+
 
 
 
