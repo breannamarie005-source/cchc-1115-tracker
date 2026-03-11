@@ -276,64 +276,6 @@ Export Dashboard PDF
 
 </div>
 
-<!-- MONTHLY -->
-<div id="monthlyTab" class="tabSection">
-
-<div class="card">
-
-<h3>Monthly Performance</h3>
-
-<label>Select Month</label>
-<input type="month" id="monthSelector" onchange="loadMonthlyData()">
-
-<br><br>
-
-<div class="dashboard-grid">
-
-<div class="card">
-<h4>Clients</h4>
-<div id="monthClients">0</div>
-</div>
-
-<div class="card">
-<h4>Units</h4>
-<div id="monthUnitsTotal">0</div>
-</div>
-
-<div class="card">
-<h4>Revenue</h4>
-<div id="monthRevenue">$0</div>
-</div>
-
-</div>
-
-<br>
-
-<div style="max-width:600px;margin:auto;">
-<div style="
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:30px;
-max-width:1000px;
-margin:auto;
-">
-
-<div>
-<h4 style="text-align:center;">Clients per Navigator</h4>
-<canvas id="monthlyNavigatorChart"></canvas>
-</div>
-
-<div>
-<h4 style="text-align:center;">Revenue per Navigator</h4>
-<canvas id="monthlyRevenueNavigatorChart"></canvas>
-</div>
-
-</div>
-</div>
-
-</div>
-</div>
-
 <!-- CLIENT ENTRY -->
 <div id="entryTab" class="tabSection">
   <div class="card">
@@ -1321,6 +1263,7 @@ data:Object.values(navRevenue)
 </script>
 </body>
 </html>
+
 
 
 
