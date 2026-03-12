@@ -1029,7 +1029,10 @@ tableBody.innerHTML+=`
 <td>${data.followUpDate||""}</td>
 <td>${units}</td>
 <td>${(data.services||[]).map(s=>s.name+" ($"+s.amount+")").join(", ")}</td>
-<td></td>
+<td>
+<button onclick="editClient('${data.id}')">Edit</button>
+<button onclick="deleteClient('${data.id}')">Delete</button>
+</td>
 </tr>
 `;
 
@@ -1222,6 +1225,7 @@ XLSX.writeFile(wb,"clients.xlsx");
 </script>
 </body>
 </html>
+
 
 
 
