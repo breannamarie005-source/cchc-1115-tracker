@@ -843,6 +843,7 @@ let medicaidLevelCounts = {};
 let monthlyRevenue = {};
 let followUpsToday = 0;
 let followUpsOverdue = 0;
+let followUpAlerts = [];
   
 filtered.forEach(data=>{
 
@@ -1312,6 +1313,7 @@ XLSX.writeFile(wb,"clients.xlsx");
 </script>
 </body>
 </html>
+
 
 
 
