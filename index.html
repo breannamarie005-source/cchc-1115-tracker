@@ -742,6 +742,9 @@ document.getElementById("dashboardMonth").value;
 
 let filtered = [];
 
+console.log("Selected Month:", selectedMonth);
+console.log("All Clients:", clientsData);
+
 if(!selectedMonth){
 
 filtered = [...clientsData];
@@ -1210,6 +1213,7 @@ XLSX.writeFile(wb,"clients.xlsx");
 </script>
 </body>
 </html>
+
 
 
 
