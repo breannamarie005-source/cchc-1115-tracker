@@ -692,16 +692,64 @@ calculateTotals();
 
 }
 
-window.editClient=async function(id){
+window.editClient = async function(id){
 
-const snap=await getDoc(doc(db,"clients",id));
-const d=snap.data();
+const snap = await getDoc(doc(db,"clients",id));
+const d = snap.data();
 
-document.getElementById("clientName").value=d.client||"";
-document.getElementById("status").value=d.status||"Open";
-document.getElementById("navigator").value=d.navigator||"";
+/* BASIC INFO */
 
-window.editingId=id;
+document.getElementById("clientName").value = d.client || "";
+document.getElementById("status").value = d.status || "Open";
+document.getElementById("navigator").value = d.navigator || "";
+
+document.getElementById("medicaid").value = d.medicaid || "";
+document.getElementById("medicaidLevel").value = d.medicaidLevel || "";
+
+document.getElementById("eligibilityDate").value = d.eligibilityDate || "";
+document.getElementById("followUpDate").value = d.followUpDate || "";
+
+/* UNITS */
+
+document.getElementById("eligibilityUnits").value = d.eligibilityUnits || 0;
+document.getElementById("serviceUnits").value = d.serviceUnits || 0;
+
+/* RESET SERVICE CHECKBOXES */
+
+document.querySelectorAll(".svcCheck").forEach(c => c.checked = false);
+document.querySelectorAll(".svcAmount").forEach(a => a.value = "");
+
+/* LOAD SERVICES */
+
+if(d.services){
+
+d.services.forEach(service=>{
+
+document.querySelectorAll(".svcCheck").forEach((checkbox,i)=>{
+
+if(checkbox.value === service.name){
+
+checkbox.checked = true;
+
+document.querySelectorAll(".svcAmount")[i].value = service.amount;
+
+}
+
+});
+
+});
+
+}
+
+/* RECALCULATE TOTALS */
+
+calculateTotals();
+
+/* SET EDIT MODE */
+
+window.editingId = id;
+
+/* SWITCH TO ENTRY TAB */
 
 showTab("entryTab");
 
@@ -1228,6 +1276,7 @@ XLSX.writeFile(wb,"clients.xlsx");
 </script>
 </body>
 </html>
+
 
 
 
